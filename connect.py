@@ -1,13 +1,16 @@
 import MySQLdb
 
+
 class Database():
     def __init__(self):
-        self.database = MySQLdb.connect(host = "localhost", user = "root",passwd = "", db = "test")
+        self.database = MySQLdb.connect(host="localhost", user="root", passwd="", db="fra241")
+        self.cursor = self.database.cursor()
 
-    def cursor(self):
-        return self.database.cursor()
+    def getData(self,table, column):
+        sql = "SELECT " + str(column) + " FROM " + str(table)
+        return sql
 
-    def IncludeColumn(self,data):
+    def includeColumn(self,data):
         column = []
         count = 1
         pointer = 0
@@ -26,27 +29,45 @@ class Database():
         return column
 
 
-class Connect_data(Database):
-    db = Database()
-    cursor = db.cursor()
-    sql = "SELECT * from EMPLOYEE"
 
-    cursor.execute(sql)
+    def data_user(self,cursor, column):
+        sql = self.getData("user","*")
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        list_column = self.includeColumn(data)
+        if column != "*":
+            return list_column[column]
+        else:
+            return list_column
 
-    data = cursor.fetchall()
+    def data_machine(self, cursor, column):
+        cursor.execute(self.getData("machine", "*"))
+        data = cursor.fetchall()
+        list_column = self.includeColumn(data)
+        if column != "*":
+            return list_column[column-1]
+        else:
+            return list_column
 
-    print db.IncludeColumn(data)
+    def data_ic(self, cursor, column):
+        cursor.execute(self.getData("ic", "*"))
+        data = cursor.fetchall()
+        list_column = self.includeColumn(data)
+        if column != "*":
+            return list_column[column-1]
+        else:
+            return list_column
 
+    def data_history(self, cursor, column):
+        cursor.execute(self.getData("history", "*"))
+        data = cursor.fetchall()
+        list_column = self.includeColumn(data)
+        if column != "*":
+            return list_column[column-1]
+        else:
+            return list_column
 
-
-
-
-
-
-
-
-
-
-
-
+    #name = data_user(db,cursor,2)
+    #stid = data_user(db,cursor,4)
+    #num_in_machine = data_machine(db,cursor,2)
 
