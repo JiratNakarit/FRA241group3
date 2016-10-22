@@ -50,12 +50,3 @@ class Connect_data(Database):
 
 
 
-"""db = connect()
-cursor = db.cursor()
-sql = "SELECT * from EMPLOYEE"
-
-cursor.execute(sql)
-
-data = cursor.fetchall()
-
-print data"""
