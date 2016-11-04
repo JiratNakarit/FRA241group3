@@ -8,7 +8,7 @@ class database():
 def Update(table,column,operator,value,data,case):
     if data != None:
         command = "UPDATE " + str(table) + " SET " + str(column) + " = " + str(column) + " " + str(operator) + " " + \
-                str(value) + " WHERE " + str(data) + " = " + 'chin'
+                str(value) + " WHERE " + str(data) + " = " + str(case)
         return command
     else:
         command = "UPDATE " + str(table) + " SET " + str(column) + " = " + str(column) + " " + str(operator) + " " + \
