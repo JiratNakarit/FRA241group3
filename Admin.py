@@ -73,7 +73,7 @@ class Admin:
                 x.append(self.name.get())
                 x.append(int(self.Integer.get()))
                 print type(x)
-                print x
+                print x#update
                 value_type = x[0]
                 value_name = x[1]
                 value_numall = x[2]
