@@ -73,7 +73,7 @@ class Admin:
                 x.append(int(self.Integer.get()))
                 print x
              else:
-                self.msg.configure(text="try agan ")
+                self.msg.configure(text="try agan  Ja")
 
         if ans == "no":
             self.msg.configure(text="not ")
