@@ -17,7 +17,6 @@ class Admin:
 
 
 
-
         Label(self.frame2,text=" Admin",fg='red',
               font=("Vewdana",'14','bold'),height=3).pack()
 
@@ -30,11 +29,18 @@ class Admin:
         self.tye.focus_force()
         self.tye.pack(side=LEFT)
 
+        Label(self.frame5, text='Name IC: ',
+              font=fonte1, width=8).pack(side=LEFT)
+        self.name = Entry(self.frame5, width=10,
+                          font=fonte1)
+        self.name.focus_force()
+        self.name.pack(side=LEFT)
 
 
-
-        Label(self.frame3, text='Integer: ', font=fonte1,width=8).pack(side=LEFT)
-        self.Integer = Entry(self.frame3, width=10, font=fonte1)
+        Label(self.frame3, text='Integer: ',
+              font=fonte1,width=8).pack(side=LEFT)
+        self.Integer = Entry(self.frame3, width=10,
+                             font=fonte1)
         self.Integer.pack(side=LEFT)
 
         self.Enter = Button(self.frame4, font=fonte1, text='Enrter', bg='green', command=self.conferir ,relief=RAISED,\
@@ -49,21 +55,26 @@ class Admin:
         self.msg = Label(self.frame4, font=fonte1,  height=3,text='Your in put...')
         self.msg.pack()
 
-        Label(self.frame5, text='Name IC: ',
-              font=fonte1, width=8).pack(side=LEFT)
-        self.name = Entry(self.frame5, width=10,
-                          font=fonte1)
-        self.name.focus_force()
-        self.name.pack(side=LEFT)
+
 
     def conferir(self):
 
-        ans = tkMessageBox.askquestion("Are you ok", "Complete")
+        ans = tkMessageBox.askquestion("Are you ok", "check you in put")
+
 
 
         if ans == "yes":
-            self.msg.configure(text=(self.tye.get(), "__",self.name.get(), "__", self.Integer.get()))
-            print (self.tye.get(),self.name.get(),self.Integer.get())
+             if  self.Integer.get().isdigit():
+                self.msg.configure(text=(self.tye.get(), "__",self.name.get(), "__", self.Integer.get()))
+                        # print (self.tye.get(),self.name.get(),self.Integer.get())
+                x = []
+                x.append(self.tye.get())
+                x.append(self.name.get())
+                x.append(int(self.Integer.get()))
+                print x
+             else:
+                self.msg.configure(text="try agan ")
+
         if ans == "no":
             self.msg.configure(text="not ")
 
