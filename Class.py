@@ -7,14 +7,14 @@ class UpDown_num:
         self.cursor = self.db.cursor()
 
     def Update(self,icid,numall):
-        self.sql = "UPDATE machine SET numall = numall -" + " " + str(numall) + " " + "WHERE icid = '%s'" % (str(icid))         #Arm
+        self.sql = "UPDATE machine SET numall = numall -" + " " + str(numall) + " " + "WHERE icid = '%s'" % (str(icid))
 
     def Update_trllo(self, icid, numall):
         self.sql = "UPDATE trello SET Available = Available -" + " " + str(numall) + " " + "WHERE IC = '%s'" % (str(icid))
 
 
     def ic(self,value_type,value_name):
-        self.sql = "INSERT INTO `ic`(`type`,`name`) VALUES" + " " + "('%s','%s')" %(str(value_type),str(value_name))             #Bank
+        self.sql = "INSERT INTO `ic`(`type`,`name`) VALUES" + " " + "('%s','%s')" %(str(value_type),str(value_name))
 
     def machine(self,value_numall):
         self.sql = "INSERT INTO `machine`(`numall`) VALUES" + " " + "('%d')" %(value_numall)
