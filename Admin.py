@@ -1,6 +1,5 @@
 from Tkinter import *
 import tkMessageBox
-from Class import *
 
 class Admin:
 
@@ -72,19 +71,15 @@ class Admin:
                 x.append(self.tye.get())
                 x.append(self.name.get())
                 x.append(int(self.Integer.get()))
-                print type(x)
                 print x
-                value_type = x[0]
-                value_name = x[1]
-                value_numall = x[2]
-                D.ic(value_type,value_name)
-                D.machine(value_numall)
-                D.Commit()
              else:
                 self.msg.configure(text="try agan  Ja")
 
         if ans == "no":
             self.msg.configure(text="not ")
+
+
+
 instancia=Tk()
 instancia.title("Admin CH")
 instancia.geometry("650x400")

@@ -66,4 +66,3 @@ class Database():
 
             # name = data_user(db,cursor,2)
             # stid = data_user(db,cursor,4)
-            # num_in_machine = data_machine(db,cursor,2)
