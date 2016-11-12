@@ -78,6 +78,7 @@ class Admin:
                 value_name = x[1]
                 value_numall = x[2]
                 D.ic(value_type,value_name)
+                D.Commit()
                 D.machine(value_numall)
                 D.Commit()
              else:

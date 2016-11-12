@@ -14,10 +14,10 @@ class UpDown_num:
 
 
     def ic(self,value_type,value_name):
-        self.sql = "INSERT INTO `ic`(`type`,`name`) VALUES" + " " + "('%s','%s')" %(str(value_type),str(value_name))
+        self.sql = "INSERT INTO `ic`(`type`,`name`) VALUES" + " " + "('%s','%s')" % (str(value_type),str(value_name))
 
     def machine(self,value_numall):
-        self.sql = "INSERT INTO `machine`(`numall`) VALUES" + " " + "('%d')" %(value_numall)
+        self.sql = "INSERT INTO `machine`(`numall`) VALUES" + " " + "('%d')" % (value_numall)
 
     def Commit(self):
 
