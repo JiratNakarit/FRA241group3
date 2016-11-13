@@ -7,6 +7,7 @@ EXPLAND_FONT = ("Helvetica", 10, "bold")
 TITLE2_FONT = ("Helvetica", 25, "bold")
 BUTTON_FONT = ("Helvetica", 12, "bold")
 TYPE_FONT = ("Helvetica", 15, "bold")
+font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
 D_TYPE = ["Default", "741G374", "74HC74"]
 JK_TYPE = ["Default", "DM7473", "DM7476"]
@@ -14,7 +15,7 @@ AND_GATE = ["Default", "74HC08", "DM7411"]
 NAND_GATE = ["Default", "74LS10", "74LS13"]
 OR_GATE = ["Default", "DM74LS32", "741G32"]
 
-
+#Sorawis code(Arm)
 class UserInterface(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -28,7 +29,7 @@ class UserInterface(tk.Tk):
         container.grid_columnconfigure(0, weight=1, minsize=500)
 
         self.frames = {}
-        for F in (StartPage, PageOne, PageTwo):
+        for F in (StartPage, PageOne, PageTwo,Admin):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -76,6 +77,8 @@ class StartPage(tk.Frame):
         button = tk.Button(self, text="I'm accept", height=2, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
+        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("Admin"))
+        admin.pack(side=BOTTOM, fill='x')
 
 class PageOne(tk.Frame):
     count1 = 0
@@ -261,6 +264,58 @@ class PageTwo(tk.Frame):
         button = tk.Button(self, text="Not sure",command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill="x")
 
+#Worawit Code(Bank)
+class Admin(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.frame1 = Frame(self)
+        self.frame1.pack()
+        self.frame2 = Frame(self)
+        self.frame2.pack()
+        self.frame5 = Frame(self)
+        self.frame5.pack()
+        self.frame3 = Frame(self)
+        self.frame3.pack()
+        self.frame4 = Frame(self, pady=10)
+        self.frame4.pack()
+
+        Label(self.frame2, text=" Admin", fg='red', font=("Vewdana", '14', 'bold'), height=3).pack()
+        Label(self.frame2, text='Tye: ', font=font1, width=8).pack(side=LEFT)
+        self.type = Entry(self.frame2, width=10, font=font1)
+        self.type.focus_force()
+        self.type.pack(side=LEFT)
+        Label(self.frame5, text='Name IC: ', font=font1, width=8).pack(side=LEFT)
+        self.name = Entry(self.frame5, width=10, font=font1)
+        self.name.focus_force()
+        self.name.pack(side=LEFT)
+        Label(self.frame3, text='Integer: ', font=font1, width=8).pack(side=LEFT)
+        self.Integer = Entry(self.frame3, width=10, font=font1)
+        self.Integer.pack(side=LEFT)
+        self.Enter = Button(self.frame4, font=font1, text='Enter', bg='green', command=self.check, relief=RAISED,
+                            cursor="plus")
+        self.Enter.pack()
+        self.Back = Button(self.frame4, font=font1, text='Back', bg='red',  relief=RAISED, cursor="plus",
+                           command=lambda: controller.show_frame("StartPage"))
+        self.Back.pack()
+        self.msg = Label(self.frame4, font=font1,  height=3,text='Your in put...')
+        self.msg.pack()
+
+    def check(self):
+        ans = tkMessageBox.askquestion("Check!", "Are you sure?")
+        if ans == "yes":
+             if self.Integer.get().isdigit():
+                self.msg.configure(text=("Added:", self.type.get(), "__", self.name.get(), "__", self.Integer.get()
+                                         , "piece"))
+                x = []
+                x.append(self.type.get())
+                x.append(self.name.get())
+                x.append(int(self.Integer.get()))
+                print x
+             else:
+                self.msg.configure(text="Nothing to Add")
+
+        if ans == "no":
+            self.msg.configure(text=" ")
 
 '''def main():
     root = Tk()
