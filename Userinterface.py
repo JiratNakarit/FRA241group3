@@ -30,7 +30,7 @@ class UserInterface(tk.Tk):
         container.grid_columnconfigure(0, weight=1, minsize=500)
 
         self.frames = {}
-        for F in (StartPage, PageOne, PageTwo,Admin):
+        for F in (StartPage, PageOne, PageTwo):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -265,58 +265,7 @@ class PageTwo(tk.Frame):
         button = tk.Button(self, text="Not sure",command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill="x")
 
-#Worawit Code(Bank)
-class Admin(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.frame1 = Frame(self)
-        self.frame1.pack()
-        self.frame2 = Frame(self)
-        self.frame2.pack()
-        self.frame5 = Frame(self)
-        self.frame5.pack()
-        self.frame3 = Frame(self)
-        self.frame3.pack()
-        self.frame4 = Frame(self, pady=10)
-        self.frame4.pack()
 
-        Label(self.frame2, text=" Admin", fg='red', font=("Vewdana", '14', 'bold'), height=3).pack()
-        Label(self.frame2, text='Tye: ', font=font1, width=8).pack(side=LEFT)
-        self.type = Entry(self.frame2, width=10, font=font1)
-        self.type.focus_force()
-        self.type.pack(side=LEFT)
-        Label(self.frame5, text='Name IC: ', font=font1, width=8).pack(side=LEFT)
-        self.name = Entry(self.frame5, width=10, font=font1)
-        self.name.focus_force()
-        self.name.pack(side=LEFT)
-        Label(self.frame3, text='Integer: ', font=font1, width=8).pack(side=LEFT)
-        self.Integer = Entry(self.frame3, width=10, font=font1)
-        self.Integer.pack(side=LEFT)
-        self.Enter = Button(self.frame4, font=font1, text='Enter', bg='green', command=self.check, relief=RAISED,
-                            cursor="plus")
-        self.Enter.pack()
-        self.Back = Button(self.frame4, font=font1, text='Back', bg='red',  relief=RAISED, cursor="plus",
-                           command=lambda: controller.show_frame("StartPage"))
-        self.Back.pack()
-        self.msg = Label(self.frame4, font=font1,  height=3,text='Your in put...')
-        self.msg.pack()
-
-    def check(self):
-        ans = tkMessageBox.askquestion("Check!", "Are you sure?")
-        if ans == "yes":
-             if self.Integer.get().isdigit():
-                self.msg.configure(text=("Added:", self.type.get(), "__", self.name.get(), "__", self.Integer.get()
-                                         , "piece"))
-                x = []
-                x.append(self.type.get())
-                x.append(self.name.get())
-                x.append(int(self.Integer.get()))
-                print x
-             else:
-                self.msg.configure(text="Nothing to Add")
-
-        if ans == "no":
-            self.msg.configure(text=" ")
 
 '''def main():
     root = Tk()
