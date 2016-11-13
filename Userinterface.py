@@ -24,7 +24,7 @@ class UserInterface(tk.Tk):
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
         # will be raised above the others
-        container = tk.Frame(*args, borderwidth=20, bg='cyan', **kwargs)
+        container = tk.Frame(*args, borderwidth=20, bg='orange', **kwargs)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1, minsize=300)
         container.grid_columnconfigure(0, weight=1, minsize=500)
@@ -79,7 +79,7 @@ class StartPage(tk.Frame):
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
         admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("Admin"))
-        admin.pack(side=BOTTOM, fill='x')
+        admin.place(x=5,y=10)
 
 class PageOne(tk.Frame):
     count1 = 0
@@ -108,6 +108,12 @@ class PageOne(tk.Frame):
         ic_type4.place(x=25, y=290)
         ic_type5 = tk.Label(self, text="NAND - GATE", font=IC_FONT)
         ic_type5.place(x=25, y=360)
+
+        global variable1
+        global variable2
+        global variable3
+        global variable4
+        global variable5
 
         variable1 = StringVar(self)
         variable1.set(D_TYPE[0])
@@ -195,65 +201,73 @@ class PageOne(tk.Frame):
         button1 = tk.Button(self, text="Go to the start page", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("StartPage"))
         button1.place(x=20, y=460)
-
         if self.count1 == 0:
-            print(self.count1)
-            button2 = tk.Button(self, text="Sure", font=BUTTON_FONT, command=self.warning)
+            button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=self.warning)
             button2.place(x=700, y=460)
-        button2 = tk.Button(self, text="Sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageTwo"))
+        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=lambda: controller.show_frame("PageTwo"))
         button2.place(x=700, y=460)
 
 
     def In1(self):
+        global count1
         self.count1 += 1
         var1.set(self.count1)
-        print(self.count1)
+        var6.set(self.count1)
 
     def De1(self):
         self.count1 -= 1
         if self.count1 <= 0:
             self.count1 = 0
         var1.set(self.count1)
+        var6.set(self.count1)
 
     def In2(self):
         self.count2 += 1
         var2.set(self.count2)
+        var7.set(self.count2)
 
     def De2(self):
         self.count2 -= 1
         if self.count2 <= 0:
             self.count2 = 0
         var2.set(self.count2)
+        var7.set(self.count2)
 
     def In3(self):
         self.count3 += 1
         var3.set(self.count3)
+        var8.set(self.count3)
 
     def De3(self):
         self.count3 -= 1
         if self.count3 <= 0:
             self.count3 = 0
         var3.set(self.count3)
+        var8.set(self.count3)
 
     def In4(self):
         self.count4 += 1
         var4.set(self.count4)
+        var9.set(self.count4)
 
     def De4(self):
         self.count4 -= 1
         if self.count4 <= 0:
             self.count4 = 0
         var4.set(self.count4)
+        var9.set(self.count4)
 
     def In5(self):
         self.count5 += 1
         var5.set(self.count5)
+        var10.set(self.count5)
 
     def De5(self):
         self.count5 -= 1
         if self.count5 <= 0:
             self.count5 = 0
         var5.set(self.count5)
+        var10.set(self.count5)
 
     def warning(self):
         tkMessageBox.showwarning("WARNING!!", "Please select at least one piece")
@@ -263,8 +277,49 @@ class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        button = tk.Button(self, text="Not sure",command=lambda: controller.show_frame("PageOne"))
-        button.pack(side=BOTTOM, fill="x")
+        notsure = tk.Button(self, text="Not sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
+        notsure.place(x=20, y=460)
+        sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
+        sure.place(x=700, y=460)
+        global var6
+        var6 = StringVar(self)
+        var6.set(0)
+        global var7
+        var7 = StringVar(self)
+        var7.set(0)
+        global var8
+        var8 = StringVar(self)
+        var8.set(0)
+        global var9
+        var9 = StringVar(self)
+        var9.set(0)
+        global var10
+        var10 = StringVar(self)
+        var10.set(0)
+
+
+        label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
+        label1.place(height=30, width=70, x=100, y=80)
+        label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
+        label2.place(height=30, width=70, x=100, y=150)
+        label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
+        label3.place(height=30, width=70, x=100, y=220)
+        label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
+        label4.place(height=30, width=70, x=100, y=290)
+        label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
+        label5.place(height=30, width=70, x=100, y=360)
+        label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
+        label6.place(height=30, width=70, x=350, y=80)
+        label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
+        label7.place(height=30, width=70, x=350, y=150)
+        label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
+        label8.place(height=30, width=70, x=350, y=220)
+        label9 = Label(self, textvariable=var9, font=BUTTON_FONT, relief=RAISED)
+        label9.place(height=30, width=70, x=350, y=290)
+        label10 = Label(self, textvariable=var10, font=BUTTON_FONT, relief=RAISED)
+        label10.place(height=30, width=70, x=350, y=360)
+
+
 
 #Worawit Code(Bank)
 class Admin(tk.Frame):
