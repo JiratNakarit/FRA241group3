@@ -16,6 +16,7 @@ NAND_GATE = ["Default", "74LS10", "74LS13"]
 OR_GATE = ["Default", "DM74LS32", "741G32"]
 
 #Sorawis code(Arm)
+
 class UserInterface(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
