@@ -368,6 +368,13 @@ class Admin(tk.Frame):
                 x.append(self.name.get())
                 x.append(int(self.Integer.get()))
                 print x
+                value_type = x[0]
+                value_name = x[1]
+                value_numall = x[2]
+                D.ic(value_type, value_name)
+                D.Commit()
+                D.machine(value_numall)
+                D.Commit()
              else:
                 self.msg.configure(text="Nothing to Add")
 
