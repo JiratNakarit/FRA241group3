@@ -1,6 +1,7 @@
-import Tkinter as tk
 from Tkinter import *
 import tkMessageBox
+import Tkinter as tk
+
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -30,7 +31,7 @@ class UserInterface(tk.Tk):
         container.grid_columnconfigure(0, weight=1, minsize=500)
 
         self.frames = {}
-        for F in (StartPage, PageOne, PageTwo, Admin):
+        for F in (StartPage, PageOne, PageTwo, Admin,RFID):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -78,7 +79,7 @@ class StartPage(tk.Frame):
         button = tk.Button(self, text="I'm accept", height=2, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
-        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("Admin"))
+        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("RFID"))
         admin.place(x=5,y=10)
 
 class PageOne(tk.Frame):
@@ -338,6 +339,7 @@ class PageTwo(tk.Frame):
         label10.place(height=30, width=70, x=350, y=360)
 
 #Worawit Code(Bank)
+
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -396,6 +398,17 @@ class Admin(tk.Frame):
 
         if ans == "no":
             self.msg.configure(text=" ")
+
+
+class RFID(tk.Frame):
+    def __init__(self, parent, controller):
+
+        tk.Frame.__init__(self, parent)
+
+        button = tk.Button(self, text=" scan RFID", height=2, font=BUTTON_FONT,
+                           command=lambda: controller.show_frame("Admin"))
+        button.pack(side=BOTTOM, fill='x')
+
 
 '''def main():
     root = Tk()
