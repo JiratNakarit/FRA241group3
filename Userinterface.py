@@ -1,6 +1,8 @@
-import Tkinter as tk
 from Tkinter import *
 import tkMessageBox
+import Tkinter as tk
+import Tkinter
+
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -33,7 +35,7 @@ class UserInterface(tk.Tk):
         container.grid_columnconfigure(0, weight=1, minsize=500)
 
         self.frames = {}
-        for F in (StartPage, PageOne, PageTwo, Admin):
+        for F in (StartPage, PageOne, PageTwo, Admin,RFID):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -81,7 +83,7 @@ class StartPage(tk.Frame):
         button = tk.Button(self, text="I'm accept", height=2, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
-        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("Admin"))
+        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("RFID"))
         admin.place(x=5,y=10)
 
 class PageOne(tk.Frame):
@@ -204,15 +206,10 @@ class PageOne(tk.Frame):
         button1 = tk.Button(self, text="Go to the start page", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("StartPage"))
         button1.place(x=20, y=460)
-        if self.count1 == 0:
-            button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=self.warning)
-            button2.place(x=700, y=460)
-        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=lambda: controller.show_frame("PageTwo"))
+        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=self.checkuser)
         button2.place(x=700, y=460)
 
-
     def In1(self):
-        global count1
         self.count1 += 1
         count1p2 = self.count1
         var1.set(self.count1)
@@ -273,9 +270,31 @@ class PageOne(tk.Frame):
         var5.set(self.count5)
         #var10.set(self.count5)
 
-    def warning(self):
-        tkMessageBox.showwarning("WARNING!!", "Please select at least one piece")
-
+    def checkuser(self):
+        if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get() == str(0)\
+            and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() == str("Default")\
+            and variable4.get() == str("Default") and variable5.get() == str("Default"):
+            tkMessageBox.showwarning("WARNING!", "Please select at least one")
+        if variable1.get() != str("Default") and var1.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
+        if variable2.get() != str("Default") and var2.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable2.get()+" do you want?")
+        if variable3.get() != str("Default") and var3.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
+        if variable4.get() != str("Default") and var4.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
+        if variable5.get() != str("Default") and var5.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
+        if variable1.get() == str("Default") and var1.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
+        if variable2.get() == str("Default") and var2.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
+        if variable3.get() == str("Default") and var3.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
+        if variable4.get() == str("Default") and var4.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
+        if variable5.get() == str("Default") and var5.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
 
 class PageTwo(tk.Frame):
 
@@ -286,6 +305,7 @@ class PageTwo(tk.Frame):
         notsure.place(x=20, y=460)
         sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
         sure.place(x=700, y=460)
+<<<<<<< HEAD
         # global var6
         # var6 = StringVar(self)
         # var6.set(0)
@@ -314,6 +334,29 @@ class PageTwo(tk.Frame):
         label6 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
         label6.place(height=30, width=70, x=350, y=80)
 
+=======
+        global var6
+        var6 = StringVar(self)
+        var6.set(0)
+        global var7
+        var7 = StringVar(self)
+        var7.set(0)
+        global var8
+        var8 = StringVar(self)
+        var8.set(0)
+        global var9
+        var9 = StringVar(self)
+        var9.set(0)
+        global var10
+        var10 = StringVar(self)
+        var10.set(0)
+
+        if variable1.get() != str("Default") and var1.get() != str(0):
+            label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
+            label1.place(height=30, width=70, x=100, y=80)
+            label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
+            label6.place(height=30, width=70, x=350, y=80)
+>>>>>>> refs/remotes/origin/master
         label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=100, y=150)
         label7 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
@@ -321,7 +364,18 @@ class PageTwo(tk.Frame):
 
         label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
         label3.place(height=30, width=70, x=100, y=220)
+<<<<<<< HEAD
         label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
+=======
+        label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
+        label4.place(height=30, width=70, x=100, y=290)
+        label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
+        label5.place(height=30, width=70, x=100, y=360)
+
+        label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
+        label7.place(height=30, width=70, x=350, y=150)
+        label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
+>>>>>>> refs/remotes/origin/master
         label8.place(height=30, width=70, x=350, y=220)
 
         # label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
@@ -336,9 +390,8 @@ class PageTwo(tk.Frame):
 
 
 
-
-
 #Worawit Code(Bank)
+
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -354,7 +407,7 @@ class Admin(tk.Frame):
         self.frame4.pack()
 
         Label(self.frame2, text=" Admin", fg='red', font=("Vewdana", '14', 'bold'), height=3).pack()
-        Label(self.frame2, text='Tye: ', font=font1, width=8).pack(side=LEFT)
+        Label(self.frame2, text='Type: ', font=font1, width=8).pack(side=LEFT)
         self.type = Entry(self.frame2, width=10, font=font1)
         self.type.focus_force()
         self.type.pack(side=LEFT)
@@ -365,16 +418,25 @@ class Admin(tk.Frame):
         Label(self.frame3, text='Integer: ', font=font1, width=8).pack(side=LEFT)
         self.Integer = Entry(self.frame3, width=10, font=font1)
         self.Integer.pack(side=LEFT)
-        self.Enter = Button(self.frame4, font=font1, text='Enter', bg='green', command=self.check, relief=RAISED,
+        self.Enter = Button(self, font=font1, text='Enter', bg='green', height=2, command=self.checkadmin,
+                            relief=RAISED,
                             cursor="plus")
-        self.Enter.pack()
-        self.Back = Button(self.frame4, font=font1, text='Back', bg='red',  relief=RAISED, cursor="plus",
+        self.Enter.place(x=700, y=460)
+        self.Back = Button(self, font=font1, height=2, text='Back', bg='red', relief=RAISED, cursor="plus",
                            command=lambda: controller.show_frame("StartPage"))
-        self.Back.pack()
+        self.Back.place(x=20, y=460)
+        self.ButtonClear = Button(self.frame4, font=font1, text='Clear your in put', bg='pink', relief=RAISED,
+                                  cursor="plus",command=self.Clear)
+        self.ButtonClear.pack()
         self.msg = Label(self.frame4, font=font1,  height=3,text='Your in put...')
         self.msg.pack()
 
-    def check(self):
+    def Clear(self):
+        self.name.delete(0, Tkinter.END)
+        self.type.delete(0, Tkinter.END)
+        self.Integer.delete(0, Tkinter.END)
+
+    def checkadmin(self):
         ans = tkMessageBox.askquestion("Check!", "Are you sure?")
         if ans == "yes":
              if self.Integer.get().isdigit():
@@ -397,6 +459,19 @@ class Admin(tk.Frame):
 
         if ans == "no":
             self.msg.configure(text=" ")
+
+
+class RFID(tk.Frame):
+    def __init__(self, parent, controller):
+
+        tk.Frame.__init__(self, parent)
+
+        button = tk.Button(self, text=" scan RFID", height=2, font=BUTTON_FONT,
+                           command=lambda: controller.show_frame("Admin"))
+        button.pack(side=BOTTOM, fill='x')
+
+
+
 
 '''def main():
     root = Tk()
