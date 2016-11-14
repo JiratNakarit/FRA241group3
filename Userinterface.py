@@ -1,6 +1,8 @@
-import Tkinter as tk
 from Tkinter import *
 import tkMessageBox
+import Tkinter as tk
+import Tkinter
+
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -42,7 +44,7 @@ class UserInterface(tk.Tk):
         container.grid_columnconfigure(0, weight=1, minsize=500)
 
         self.frames = {}
-        for F in (StartPage, PageOne, PageTwo, Admin):
+        for F in (StartPage, PageOne, PageTwo, Admin,RFID):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -117,7 +119,7 @@ class StartPage(tk.Frame):
         button = tk.Button(self, text="I'm accept", height=2, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
-        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("Admin"))
+        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("RFID"))
         admin.place(x=5,y=10)
 
 
@@ -352,6 +354,7 @@ class PageTwo(tk.Frame):
 
 
 #Worawit Code(Bank)
+
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -378,14 +381,23 @@ class Admin(tk.Frame):
         Label(self.frame3, text='Integer: ', font=font1, width=8).pack(side=LEFT)
         self.Integer = Entry(self.frame3, width=10, font=font1)
         self.Integer.pack(side=LEFT)
-        self.Enter = Button(self.frame4, font=font1, text='Enter', bg='green', command=self.checkadmin, relief=RAISED,
+        self.Enter = Button(self, font=font1, text='Enter', bg='green', height=2, command=self.checkadmin,
+                            relief=RAISED,
                             cursor="plus")
-        self.Enter.pack()
-        self.Back = Button(self.frame4, font=font1, text='Back', bg='red',  relief=RAISED, cursor="plus",
+        self.Enter.place(x=700, y=460)
+        self.Back = Button(self, font=font1, height=2, text='Back', bg='red', relief=RAISED, cursor="plus",
                            command=lambda: controller.show_frame("StartPage"))
-        self.Back.pack()
+        self.Back.place(x=20, y=460)
+        self.ButtonClear = Button(self.frame4, font=font1, text='Clear your in put', bg='pink', relief=RAISED,
+                                  cursor="plus",command=self.Clear)
+        self.ButtonClear.pack()
         self.msg = Label(self.frame4, font=font1,  height=3,text='Your in put...')
         self.msg.pack()
+
+    def Clear(self):
+        self.name.delete(0, Tkinter.END)
+        self.type.delete(0, Tkinter.END)
+        self.Integer.delete(0, Tkinter.END)
 
     def checkadmin(self):
         ans = tkMessageBox.askquestion("Check!", "Are you sure?")
@@ -410,6 +422,19 @@ class Admin(tk.Frame):
 
         if ans == "no":
             self.msg.configure(text=" ")
+
+
+class RFID(tk.Frame):
+    def __init__(self, parent, controller):
+
+        tk.Frame.__init__(self, parent)
+
+        button = tk.Button(self, text=" scan RFID", height=2, font=BUTTON_FONT,
+                           command=lambda: controller.show_frame("Admin"))
+        button.pack(side=BOTTOM, fill='x')
+
+
+
 
 '''def main():
     root = Tk()
