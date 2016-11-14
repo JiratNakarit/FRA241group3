@@ -1,6 +1,6 @@
 from Tkinter import *
 import tkMessageBox
-from Class import *
+#from Class import *
 
 class Admin:
 
@@ -86,6 +86,8 @@ class Admin:
 
         if ans == "no":
             self.msg.configure(text="not ")
+
+
 instancia=Tk()
 instancia.title("Admin CH")
 instancia.geometry("650x400")

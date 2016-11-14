@@ -15,6 +15,9 @@ AND_GATE = ["Default", "74HC08", "DM7411"]
 NAND_GATE = ["Default", "74LS10", "74LS13"]
 OR_GATE = ["Default", "DM74LS32", "741G32"]
 
+global count1p2
+count1p2 = 0
+
 #Sorawis code(Arm)
 
 class UserInterface(tk.Tk):
@@ -211,6 +214,7 @@ class PageOne(tk.Frame):
     def In1(self):
         global count1
         self.count1 += 1
+        count1p2 = self.count1
         var1.set(self.count1)
         var6.set(self.count1)
 
@@ -274,6 +278,7 @@ class PageOne(tk.Frame):
 
 
 class PageTwo(tk.Frame):
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -297,27 +302,38 @@ class PageTwo(tk.Frame):
         var10 = StringVar(self)
         var10.set(0)
 
+        self.show_proceed()
+        # Change : I take display to function one function expect I want to show some label
 
-        label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
-        label1.place(height=30, width=70, x=100, y=80)
-        label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
-        label2.place(height=30, width=70, x=100, y=150)
-        label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
-        label3.place(height=30, width=70, x=100, y=220)
-        label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
-        label4.place(height=30, width=70, x=100, y=290)
-        label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
-        label5.place(height=30, width=70, x=100, y=360)
-        label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
-        label6.place(height=30, width=70, x=350, y=80)
-        label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
-        label7.place(height=30, width=70, x=350, y=150)
-        label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
-        label8.place(height=30, width=70, x=350, y=220)
-        label9 = Label(self, textvariable=var9, font=BUTTON_FONT, relief=RAISED)
-        label9.place(height=30, width=70, x=350, y=290)
-        label10 = Label(self, textvariable=var10, font=BUTTON_FONT, relief=RAISED)
-        label10.place(height=30, width=70, x=350, y=360)
+    def show_proceed(self):
+
+        if(True):
+            label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
+            label1.place(height=30, width=70, x=100, y=80)
+            label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
+            label6.place(height=30, width=70, x=350, y=80)
+        else:
+            label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
+            label2.place(height=30, width=70, x=100, y=150)
+            label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
+            label7.place(height=30, width=70, x=350, y=150)
+
+        # label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
+        # label3.place(height=30, width=70, x=100, y=220)
+        # label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
+        # label8.place(height=30, width=70, x=350, y=220)
+
+        # label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
+        # label4.place(height=30, width=70, x=100, y=290)
+        # label9 = Label(self, textvariable=var9, font=BUTTON_FONT, relief=RAISED)
+        # label9.place(height=30, width=70, x=350, y=290)
+
+        # label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
+        # label5.place(height=30, width=70, x=100, y=360)
+        # label10 = Label(self, textvariable=var10, font=BUTTON_FONT, relief=RAISED)
+        # label10.place(height=30, width=70, x=350, y=360)
+
+
 
 
 
