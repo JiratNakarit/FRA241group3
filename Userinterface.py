@@ -37,7 +37,6 @@ OR_GATE = ["Default", "DM74LS32", "741G32"]'''
 #you can use .get() to see data of variable
 
 class UserInterface(tk.Tk):
-    # item = [var1,var2,var3,var4,var5]
     count = [0, 0, 0, 0, 0]
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -69,13 +68,6 @@ class UserInterface(tk.Tk):
         frame.tkraise()
 
     def CheckUser(self):
-        '''check = 0
-        for item in self.item:
-            if item.get() == str(0):
-                check += 1
-        if check == 5:
-            tkMessageBox.showwarning("WARNING!", "Please select at least one")'''
-
         if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get()\
                 == str(0) and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() \
                 == str("Default") and variable4.get() == str("Default") and variable5.get() == str("Default"):
