@@ -4,6 +4,7 @@ from Tkinter import *
 from Class import *
 
 
+
 class Admin:
     def __init__(self, toplevel):
         self.frame1 = Frame(toplevel)

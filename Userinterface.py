@@ -3,7 +3,7 @@ import Tkinter
 import tkMessageBox
 from Tkinter import *
 
-from Class import *
+#from Class import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -74,28 +74,25 @@ class UserInterface(tk.Tk):
             tkMessageBox.showwarning("WARNING!", "Please select at least one")
         if variable1.get() != str("Default") and var1.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
-        if variable2.get() != str("Default") and var2.get() == str(0):
+        elif variable2.get() != str("Default") and var2.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many " + variable2.get() + " do you want?", )
-        if variable3.get() != str("Default") and var3.get() == str(0):
+        elif variable3.get() != str("Default") and var3.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
-        if variable4.get() != str("Default") and var4.get() == str(0):
+        elif variable4.get() != str("Default") and var4.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
-        if variable5.get() != str("Default") and var5.get() == str(0):
+        elif variable5.get() != str("Default") and var5.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
-        if variable1.get() == str("Default") and var1.get() != str(0):
+        elif variable1.get() == str("Default") and var1.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
-        if variable2.get() == str("Default") and var2.get() != str(0):
+        elif variable2.get() == str("Default") and var2.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
-        if variable3.get() == str("Default") and var3.get() != str(0):
+        elif variable3.get() == str("Default") and var3.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
-        if variable4.get() == str("Default") and var4.get() != str(0):
+        elif variable4.get() == str("Default") and var4.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
-        if variable5.get() == str("Default") and var5.get() != str(0):
+        elif variable5.get() == str("Default") and var5.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
-        if (variable1.get() != str("Default") and var1.get() != str(0)) or (variable2.get() != str("Default") and
-                                                                                    var2.get() != str(0)) or (
-                        variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get()
-            != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)):
+        else:
             self.show_frame("PageTwo")
 
     def In(self, num):
@@ -412,8 +409,3 @@ class RFID(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
-
-
-
-
-
