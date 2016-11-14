@@ -140,7 +140,7 @@ $(function() {
     <hr/>
 <p>&nbsp;</p>
 
-<table width = "1000" border = "1">
+<table width = "1000" border = "0">
 	<tr>
 		<th width="30%" align="center"><strong>ชนิด IC</strong></th>
 		<th width="30%" align="center"><strong>รหัส IC</strong></th>
