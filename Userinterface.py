@@ -17,6 +17,18 @@ OR_GATE = ["Default", "DM74LS32", "741G32"]
 
 #Sorawis code(Arm)
 
+#variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
+#variable2 - data in list of JK_TYPE = ["Default", "DM7473", "DM7476"]
+#variable3 - data in list of AND_GATE = ["Default", "74HC08", "DM7411"]
+#variable4 - data in list of NAND_GATE = ["Default", "74LS10", "74LS13"]
+#variable5 - data in list of OR_GATE = ["Default", "DM74LS32", "741G32"]
+#var1 , var6 - number of D-Type IC
+#var2 , var7 - number of JK-Type IC
+#var3 , var8 - number of AND_GATE IC
+#var4 , var9 - number of OR_GATE IC
+#var5 , var10 - number of NAND_GATE IC
+#you can use .get() to see data of variable
+
 class UserInterface(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -408,7 +420,6 @@ class Admin(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
-
 
 
 
