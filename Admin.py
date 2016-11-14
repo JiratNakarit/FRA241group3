@@ -1,11 +1,8 @@
 import tkMessageBox
-<<<<<<< HEAD
-#from Class import *
-=======
 from Tkinter import *
 
 from Class import *
->>>>>>> refs/remotes/origin/master
+
 
 
 class Admin:
@@ -85,16 +82,8 @@ class Admin:
             self.msg.configure(text="not ")
 
 
-<<<<<<< HEAD
-instancia=Tk()
-instancia.title("Admin CH")
-instancia.geometry("650x400")
-Admin(instancia)
-instancia.mainloop()
-=======
 instance = Tk()
 instance.title("Admin CH")
 instance.geometry("650x400")
 Admin(instance)
 instance.mainloop()
->>>>>>> refs/remotes/origin/master

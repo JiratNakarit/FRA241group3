@@ -3,7 +3,7 @@ import Tkinter
 import tkMessageBox
 from Tkinter import *
 
-from Class import *
+#from Class import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -22,9 +22,6 @@ JK_TYPE = ["Default", "DM7473", "DM7476"]
 AND_GATE = ["Default", "74HC08", "DM7411"]
 NAND_GATE = ["Default", "74LS10", "74LS13"]
 OR_GATE = ["Default", "DM74LS32", "741G32"]'''
-
-global count1p2
-count1p2 = 0
 
 #Sorawis code(Arm)
 #variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
@@ -77,28 +74,25 @@ class UserInterface(tk.Tk):
             tkMessageBox.showwarning("WARNING!", "Please select at least one")
         if variable1.get() != str("Default") and var1.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
-        if variable2.get() != str("Default") and var2.get() == str(0):
+        elif variable2.get() != str("Default") and var2.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many " + variable2.get() + " do you want?", )
-        if variable3.get() != str("Default") and var3.get() == str(0):
+        elif variable3.get() != str("Default") and var3.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
-        if variable4.get() != str("Default") and var4.get() == str(0):
+        elif variable4.get() != str("Default") and var4.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
-        if variable5.get() != str("Default") and var5.get() == str(0):
+        elif variable5.get() != str("Default") and var5.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
-        if variable1.get() == str("Default") and var1.get() != str(0):
+        elif variable1.get() == str("Default") and var1.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
-        if variable2.get() == str("Default") and var2.get() != str(0):
+        elif variable2.get() == str("Default") and var2.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
-        if variable3.get() == str("Default") and var3.get() != str(0):
+        elif variable3.get() == str("Default") and var3.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
-        if variable4.get() == str("Default") and var4.get() != str(0):
+        elif variable4.get() == str("Default") and var4.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
-        if variable5.get() == str("Default") and var5.get() != str(0):
+        elif variable5.get() == str("Default") and var5.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
-        if (variable1.get() != str("Default") and var1.get() != str(0)) or (variable2.get() != str("Default") and
-                                                                                    var2.get() != str(0)) or (
-                        variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get()
-            != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)):
+        else:
             self.show_frame("PageTwo")
 
     def In(self, num):
@@ -276,101 +270,8 @@ class PageOne(tk.Frame):
         button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=lambda :controller.CheckUser())
         button2.place(x=700, y=460)
 
-<<<<<<< HEAD
-    def In1(self):
-        self.count1 += 1
-        count1p2 = self.count1
-        var1.set(self.count1)
-        #var6.set(self.count1)
-
-    def De1(self):
-        self.count1 -= 1
-        if self.count1 <= 0:
-            self.count1 = 0
-        var1.set(self.count1)
-        #var6.set(self.count1)
-
-    def In2(self):
-        self.count2 += 1
-        var2.set(self.count2)
-        #var7.set(self.count2)
-
-    def De2(self):
-        self.count2 -= 1
-        if self.count2 <= 0:
-            self.count2 = 0
-        var2.set(self.count2)
-        #var7.set(self.count2)
-
-    def In3(self):
-        self.count3 += 1
-        var3.set(self.count3)
-        #var8.set(self.count3)
-
-    def De3(self):
-        self.count3 -= 1
-        if self.count3 <= 0:
-            self.count3 = 0
-        var3.set(self.count3)
-        #var8.set(self.count3)
-
-    def In4(self):
-        self.count4 += 1
-        var4.set(self.count4)
-        #var9.set(self.count4)
-
-    def De4(self):
-        self.count4 -= 1
-        if self.count4 <= 0:
-            self.count4 = 0
-        var4.set(self.count4)
-        #var9.set(self.count4)
-
-    def In5(self):
-        self.count5 += 1
-        var5.set(self.count5)
-        #var10.set(self.count5)
-
-    def De5(self):
-        self.count5 -= 1
-        if self.count5 <= 0:
-            self.count5 = 0
-        var5.set(self.count5)
-        #var10.set(self.count5)
-
-    def checkuser(self):
-        if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get() == str(0)\
-            and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() == str("Default")\
-            and variable4.get() == str("Default") and variable5.get() == str("Default"):
-            tkMessageBox.showwarning("WARNING!", "Please select at least one")
-        elif variable1.get() != str("Default") and var1.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
-        elif variable2.get() != str("Default") and var2.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable2.get()+" do you want?")
-        elif variable3.get() != str("Default") and var3.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
-        elif variable4.get() != str("Default") and var4.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
-        elif variable5.get() != str("Default") and var5.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
-        elif variable1.get() == str("Default") and var1.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
-        elif variable2.get() == str("Default") and var2.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
-        elif variable3.get() == str("Default") and var3.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
-        elif variable4.get() == str("Default") and var4.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
-        elif variable5.get() == str("Default") and var5.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
-        else:
-            self.controller.show_frame("PageTwo")
-
-=======
->>>>>>> refs/remotes/origin/master
 
 class PageTwo(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -378,110 +279,26 @@ class PageTwo(tk.Frame):
         notsure.place(x=20, y=460)
         sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=self.warning)
         sure.place(x=700, y=460)
-<<<<<<< HEAD
-# <<<<<<< HEAD
-        # global var6
-        # var6 = StringVar(self)
-        # var6.set(0)
-        # global var7
-        # var7 = StringVar(self)
-        # var7.set(0)
-        # global var8
-        # var8 = StringVar(self)
-        # var8.set(0)
-        # global var9
-        # var9 = StringVar(self)
-        # var9.set(0)
-        # global var10
-        # var10 = StringVar(self)
-        # var10.set(0)
-
-        self.show_proceed()
-        # Change : I take display to function one function expect I want to show some label
-
-    def show_proceed(self):
-
-        #if()
-
-=======
->>>>>>> refs/remotes/origin/master
         label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
         label1.place(height=30, width=70, x=100, y=80)
         label6 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
         label6.place(height=30, width=70, x=350, y=80)
-<<<<<<< HEAD
-
-# =======
-        global var6
-        var6 = StringVar(self)
-        var6.set(0)
-        global var7
-        var7 = StringVar(self)
-        var7.set(0)
-        global var8
-        var8 = StringVar(self)
-        var8.set(0)
-        global var9
-        var9 = StringVar(self)
-        var9.set(0)
-        global var10
-        var10 = StringVar(self)
-        var10.set(0)
-
-        if variable1.get() != str("Default") and var1.get() != str(0):
-            label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
-            label1.place(height=30, width=70, x=100, y=80)
-            label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
-            label6.place(height=30, width=70, x=350, y=80)
-# >>>>>>> refs/remotes/origin/master
-=======
->>>>>>> refs/remotes/origin/master
         label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=100, y=150)
         label7 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
         label7.place(height=30, width=70, x=350, y=150)
-<<<<<<< HEAD
-
-        label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
-        label3.place(height=30, width=70, x=100, y=220)
-# <<<<<<< HEAD
-        label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
-# =======
-=======
         label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
         label3.place(height=30, width=70, x=100, y=220)
         label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
         label8.place(height=30, width=70, x=350, y=220)
->>>>>>> refs/remotes/origin/master
         label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
         label4.place(height=30, width=70, x=100, y=290)
         label9 = Label(self, textvariable=var4, font=BUTTON_FONT, relief=RAISED)
         label9.place(height=30, width=70, x=350, y=290)
         label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
         label5.place(height=30, width=70, x=100, y=360)
-<<<<<<< HEAD
-
-        label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
-        label7.place(height=30, width=70, x=350, y=150)
-        label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
-# >>>>>>> refs/remotes/origin/master
-        label8.place(height=30, width=70, x=350, y=220)
-
-        # label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
-        # label4.place(height=30, width=70, x=100, y=290)
-        # label9 = Label(self, textvariable=var9, font=BUTTON_FONT, relief=RAISED)
-        # label9.place(height=30, width=70, x=350, y=290)
-
-        # label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
-        # label5.place(height=30, width=70, x=100, y=360)
-        # label10 = Label(self, textvariable=var10, font=BUTTON_FONT, relief=RAISED)
-        # label10.place(height=30, width=70, x=350, y=360)
-
-
-=======
         label10 = Label(self, textvariable=var5, font=BUTTON_FONT, relief=RAISED)
         label10.place(height=30, width=70, x=350, y=360)
->>>>>>> refs/remotes/origin/master
 
     def warning(self):
         ans = tkMessageBox.askquestion("Warning","Please use keycard")
@@ -592,8 +409,3 @@ class RFID(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
-
-
-
-
-
