@@ -275,26 +275,29 @@ class PageOne(tk.Frame):
             and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() == str("Default")\
             and variable4.get() == str("Default") and variable5.get() == str("Default"):
             tkMessageBox.showwarning("WARNING!", "Please select at least one")
-        if variable1.get() != str("Default") and var1.get() == str(0):
+        elif variable1.get() != str("Default") and var1.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
-        if variable2.get() != str("Default") and var2.get() == str(0):
+        elif variable2.get() != str("Default") and var2.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable2.get()+" do you want?")
-        if variable3.get() != str("Default") and var3.get() == str(0):
+        elif variable3.get() != str("Default") and var3.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
-        if variable4.get() != str("Default") and var4.get() == str(0):
+        elif variable4.get() != str("Default") and var4.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
-        if variable5.get() != str("Default") and var5.get() == str(0):
+        elif variable5.get() != str("Default") and var5.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
-        if variable1.get() == str("Default") and var1.get() != str(0):
+        elif variable1.get() == str("Default") and var1.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
-        if variable2.get() == str("Default") and var2.get() != str(0):
+        elif variable2.get() == str("Default") and var2.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
-        if variable3.get() == str("Default") and var3.get() != str(0):
+        elif variable3.get() == str("Default") and var3.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
-        if variable4.get() == str("Default") and var4.get() != str(0):
+        elif variable4.get() == str("Default") and var4.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
-        if variable5.get() == str("Default") and var5.get() != str(0):
+        elif variable5.get() == str("Default") and var5.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
+        else:
+            self.controller.show_frame("PageTwo")
+
 
 class PageTwo(tk.Frame):
 
@@ -305,7 +308,7 @@ class PageTwo(tk.Frame):
         notsure.place(x=20, y=460)
         sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
         sure.place(x=700, y=460)
-<<<<<<< HEAD
+# <<<<<<< HEAD
         # global var6
         # var6 = StringVar(self)
         # var6.set(0)
@@ -334,7 +337,7 @@ class PageTwo(tk.Frame):
         label6 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
         label6.place(height=30, width=70, x=350, y=80)
 
-=======
+# =======
         global var6
         var6 = StringVar(self)
         var6.set(0)
@@ -356,7 +359,7 @@ class PageTwo(tk.Frame):
             label1.place(height=30, width=70, x=100, y=80)
             label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
             label6.place(height=30, width=70, x=350, y=80)
->>>>>>> refs/remotes/origin/master
+# >>>>>>> refs/remotes/origin/master
         label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=100, y=150)
         label7 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
@@ -364,9 +367,9 @@ class PageTwo(tk.Frame):
 
         label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
         label3.place(height=30, width=70, x=100, y=220)
-<<<<<<< HEAD
+# <<<<<<< HEAD
         label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
-=======
+# =======
         label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
         label4.place(height=30, width=70, x=100, y=290)
         label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
@@ -375,7 +378,7 @@ class PageTwo(tk.Frame):
         label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
         label7.place(height=30, width=70, x=350, y=150)
         label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
->>>>>>> refs/remotes/origin/master
+# >>>>>>> refs/remotes/origin/master
         label8.place(height=30, width=70, x=350, y=220)
 
         # label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
