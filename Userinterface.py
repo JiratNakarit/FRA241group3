@@ -2,7 +2,7 @@ from Tkinter import *
 import tkMessageBox
 import Tkinter as tk
 import Tkinter
-
+import tkMessageBox
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -16,9 +16,7 @@ JK_TYPE = ["Default", "DM7473", "DM7476"]
 AND_GATE = ["Default", "74HC08", "DM7411"]
 NAND_GATE = ["Default", "74LS10", "74LS13"]
 OR_GATE = ["Default", "DM74LS32", "741G32"]
-
 #Sorawis code(Arm)
-
 #variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
 #variable2 - data in list of JK_TYPE = ["Default", "DM7473", "DM7476"]
 #variable3 - data in list of AND_GATE = ["Default", "74HC08", "DM7411"]
@@ -61,6 +59,7 @@ class UserInterface(tk.Tk):
         frame.tkraise()
 
     def CheckUser(self):
+        global state
         if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get()\
                 == str(0) and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() \
                 == str("Default") and variable4.get() == str("Default") and variable5.get() == str("Default"):
@@ -89,7 +88,6 @@ class UserInterface(tk.Tk):
             var2.get() != str(0)) or (variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get() \
             != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)):
             self.show_frame("PageTwo")
-
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -264,63 +262,43 @@ class PageOne(tk.Frame):
     def In1(self):
         self.count1 += 1
         var1.set(self.count1)
-        var6.set(self.count1)
-
     def De1(self):
         self.count1 -= 1
         if self.count1 <= 0:
             self.count1 = 0
         var1.set(self.count1)
-        var6.set(self.count1)
-
     def In2(self):
         self.count2 += 1
         var2.set(self.count2)
-        var7.set(self.count2)
-
     def De2(self):
         self.count2 -= 1
         if self.count2 <= 0:
             self.count2 = 0
         var2.set(self.count2)
-        var7.set(self.count2)
-
     def In3(self):
         self.count3 += 1
         var3.set(self.count3)
-        var8.set(self.count3)
-
     def De3(self):
         self.count3 -= 1
         if self.count3 <= 0:
             self.count3 = 0
         var3.set(self.count3)
-        var8.set(self.count3)
-
     def In4(self):
         self.count4 += 1
         var4.set(self.count4)
-        var9.set(self.count4)
-
     def De4(self):
         self.count4 -= 1
         if self.count4 <= 0:
             self.count4 = 0
         var4.set(self.count4)
-        var9.set(self.count4)
-
     def In5(self):
         self.count5 += 1
         var5.set(self.count5)
-        var10.set(self.count5)
-
     def De5(self):
         self.count5 -= 1
         if self.count5 <= 0:
             self.count5 = 0
         var5.set(self.count5)
-        var10.set(self.count5)
-
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
@@ -328,29 +306,44 @@ class PageTwo(tk.Frame):
         self.controller = controller
         notsure = tk.Button(self, text="Not sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
         notsure.place(x=20, y=460)
-        sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
+        sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=self.warning)
         sure.place(x=700, y=460)
-
         label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
         label1.place(height=30, width=70, x=100, y=80)
-        label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
+        label6 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
         label6.place(height=30, width=70, x=350, y=80)
         label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=100, y=150)
-        label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
+        label7 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
         label7.place(height=30, width=70, x=350, y=150)
         label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
         label3.place(height=30, width=70, x=100, y=220)
-        label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
+        label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
         label8.place(height=30, width=70, x=350, y=220)
         label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
         label4.place(height=30, width=70, x=100, y=290)
-        label9 = Label(self, textvariable=var9, font=BUTTON_FONT, relief=RAISED)
+        label9 = Label(self, textvariable=var4, font=BUTTON_FONT, relief=RAISED)
         label9.place(height=30, width=70, x=350, y=290)
         label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
         label5.place(height=30, width=70, x=100, y=360)
-        label10 = Label(self, textvariable=var10, font=BUTTON_FONT, relief=RAISED)
+        label10 = Label(self, textvariable=var5, font=BUTTON_FONT, relief=RAISED)
         label10.place(height=30, width=70, x=350, y=360)
+
+    def warning(self):
+        ans = tkMessageBox.askquestion("Warning","Please use keycard")
+        if ans == "yes":
+            win = []
+            win.append(variable1.get())
+            win.append(var1.get())
+            win.append(variable2.get())
+            win.append(var2.get())
+            win.append(variable3.get())
+            win.append(var3.get())
+            win.append(variable4.get())
+            win.append(var4.get())
+            win.append(variable5.get())
+            win.append(var5.get())
+            print win
 
 
 #Worawit Code(Bank)

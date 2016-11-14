@@ -12,7 +12,6 @@ class UpDown_num:
     def Update_trllo(self, icid, numall):
         self.sql = "UPDATE trello SET Available = Available -" + " " + str(numall) + " " + "WHERE IC = '%s'" % (str(icid))
 
-
     def ic(self,value_type,value_name):
         self.sql = "INSERT INTO `ic`(`type`,`name`) VALUES" + " " + "('%s','%s')" % (str(value_type),str(value_name))
 
