@@ -409,17 +409,6 @@ if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
 
-#variable1 คือ ค่าในlistของD_TYPE = ["Default", "741G374", "74HC74"]
-#variable2 คือ ค่าในlistของJK_TYPE = ["Default", "DM7473", "DM7476"]
-#variable3 คือ ค่าในlistของAND_GATE = ["Default", "74HC08", "DM7411"]
-#variable4 คือ ค่าในlistของNAND_GATE = ["Default", "74LS10", "74LS13"]
-#variable5 คือ ค่าในlistของOR_GATE = ["Default", "DM74LS32", "741G32"]
-#var1 = var6 คือ จำนวนICชนิดD-Typeที่Userทำการเลือก
-#var2 = var7 คือ จำนวนICชนิดJK-Typeที่Userทำการเลือก
-#var3 = var8 คือ จำนวนICชนิดAND_GATEที่Userทำการเลือก
-#var4 = var9 คือ จำนวนICชนิดOR_GATEที่Userทำการเลือก
-#var5 = var10 คือ จำนวนICชนิดNAND_GATEที่Userทำการเลือก
-#เวลาดึงไปใช้ก็ใช้คำสั่ง .get()ดึงไปใช้ได้เลย
 
 
 
