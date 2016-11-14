@@ -1,8 +1,9 @@
-from Tkinter import *
-import tkMessageBox
 import Tkinter as tk
 import Tkinter
+import tkMessageBox
+from Tkinter import *
 
+from Class import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -11,18 +12,35 @@ BUTTON_FONT = ("Helvetica", 12, "bold")
 TYPE_FONT = ("Helvetica", 15, "bold")
 font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
+
+Item_type = [["Default", "741G374", "74HC74"], ["Default", "DM7473", "DM7476"], ["Default", "74HC08", "DM7411"],
+             ["Default", "74LS10", "74LS13"], ["Default", "DM74LS32", "741G32"]]
+
 D_TYPE = ["Default", "741G374", "74HC74"]
+'''
 JK_TYPE = ["Default", "DM7473", "DM7476"]
 AND_GATE = ["Default", "74HC08", "DM7411"]
 NAND_GATE = ["Default", "74LS10", "74LS13"]
-OR_GATE = ["Default", "DM74LS32", "741G32"]
+OR_GATE = ["Default", "DM74LS32", "741G32"]'''
 
 global count1p2
 count1p2 = 0
 
 #Sorawis code(Arm)
+#variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
+#variable2 - data in list of JK_TYPE = ["Default", "DM7473", "DM7476"]
+#variable3 - data in list of AND_GATE = ["Default", "74HC08", "DM7411"]
+#variable4 - data in list of NAND_GATE = ["Default", "74LS10", "74LS13"]
+#variable5 - data in list of OR_GATE = ["Default", "DM74LS32", "741G32"]
+#var1 , var6 - number of D-Type IC
+#var2 , var7 - number of JK-Type IC
+#var3 , var8 - number of AND_GATE IC
+#var4 , var9 - number of OR_GATE IC
+#var5 , var10 - number of NAND_GATE IC
+#you can use .get() to see data of variable
 
 class UserInterface(tk.Tk):
+    count = [0, 0, 0, 0, 0]
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -33,6 +51,7 @@ class UserInterface(tk.Tk):
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1, minsize=300)
         container.grid_columnconfigure(0, weight=1, minsize=500)
+
 
         self.frames = {}
         for F in (StartPage, PageOne, PageTwo, Admin,RFID):
@@ -48,12 +67,69 @@ class UserInterface(tk.Tk):
         self.show_frame("StartPage")
 
     def show_frame(self, page_name):
-        '''for frame in self.frames.values():
-            frame.grid_remove()'''
-
         frame = self.frames[page_name]
         frame.tkraise()
 
+    def CheckUser(self):
+        if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get()\
+                == str(0) and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() \
+                == str("Default") and variable4.get() == str("Default") and variable5.get() == str("Default"):
+            tkMessageBox.showwarning("WARNING!", "Please select at least one")
+        if variable1.get() != str("Default") and var1.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
+        if variable2.get() != str("Default") and var2.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many " + variable2.get() + " do you want?", )
+        if variable3.get() != str("Default") and var3.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
+        if variable4.get() != str("Default") and var4.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
+        if variable5.get() != str("Default") and var5.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
+        if variable1.get() == str("Default") and var1.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
+        if variable2.get() == str("Default") and var2.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
+        if variable3.get() == str("Default") and var3.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
+        if variable4.get() == str("Default") and var4.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
+        if variable5.get() == str("Default") and var5.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
+        if (variable1.get() != str("Default") and var1.get() != str(0)) or (variable2.get() != str("Default") and
+                                                                                    var2.get() != str(0)) or (
+                        variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get()
+            != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)):
+            self.show_frame("PageTwo")
+
+    def In(self, num):
+        self.count[num - 1] += 1
+        if (num == 1):
+            var1.set(self.count[num - 1])
+        elif (num == 2):
+            var2.set(self.count[num - 1])
+        elif (num == 3):
+            var3.set(self.count[num - 1])
+        elif (num == 4):
+            var4.set(self.count[num - 1])
+        elif (num == 5):
+            var5.set(self.count[num - 1])
+        print self.count
+
+    def De(self, num):
+        self.count[num - 1] -= 1
+        if self.count[num - 1] <= 0:
+            self.count[num - 1] = 0
+        if (num == 1):
+            var1.set(self.count[num - 1])
+        elif (num == 2):
+            var2.set(self.count[num - 1])
+        elif (num == 3):
+            var3.set(self.count[num - 1])
+        elif (num == 4):
+            var4.set(self.count[num - 1])
+        elif (num == 5):
+            var5.set(self.count[num - 1])
+        print self.count
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -86,13 +162,9 @@ class StartPage(tk.Frame):
         admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("RFID"))
         admin.place(x=5,y=10)
 
-class PageOne(tk.Frame):
-    count1 = 0
-    count2 = 0
-    count3 = 0
-    count4 = 0
-    count5 = 0
 
+class PageOne(tk.Frame):
+    height = 5
     def __init__(self, parent, controller):
 
         tk.Frame.__init__(self, parent)
@@ -114,101 +186,97 @@ class PageOne(tk.Frame):
         ic_type5 = tk.Label(self, text="NAND - GATE", font=IC_FONT)
         ic_type5.place(x=25, y=360)
 
-        global variable1
-        global variable2
-        global variable3
-        global variable4
-        global variable5
+        self.variables = []
+        self.nup = 0
+        for i in range(self.height):
+            var = StringVar()
+            var.set(Item_type[self.nup][0])
+            self.variables.append(var)
+            self.nup += 1
 
-        variable1 = StringVar(self)
-        variable1.set(D_TYPE[0])
-        variable2 = StringVar(self)
-        variable2.set(JK_TYPE[0])
-        variable3 = StringVar(self)
-        variable3.set(AND_GATE[0])
-        variable4 = StringVar(self)
-        variable4.set(OR_GATE[0])
-        variable5 = StringVar(self)
-        variable5.set(NAND_GATE[0])
+        global variable1, variable2, variable3, variable4, variable5
+        variable1 = self.variables[0]
+        variable2 = self.variables[1]
+        variable3 = self.variables[2]
+        variable4 = self.variables[3]
+        variable5 = self.variables[4]
 
-        select1 = apply(OptionMenu, (self, variable1) + tuple(D_TYPE))
+        select1 = apply(OptionMenu, (self, variable1) + tuple(Item_type[0]))
         select1.place(x=140, y=78)
-        select1 = apply(OptionMenu, (self, variable2) + tuple(JK_TYPE))
+        select1 = apply(OptionMenu, (self, variable2) + tuple(Item_type[1]))
         select1.place(x=140, y=148)
-        select1 = apply(OptionMenu, (self, variable3) + tuple(AND_GATE))
+        select1 = apply(OptionMenu, (self, variable3) + tuple(Item_type[2]))
         select1.place(x=140, y=218)
-        select1 = apply(OptionMenu, (self, variable4) + tuple(OR_GATE))
+        select1 = apply(OptionMenu, (self, variable4) + tuple(Item_type[3]))
         select1.place(x=140, y=288)
-        select1 = apply(OptionMenu, (self, variable5) + tuple(NAND_GATE))
+        select1 = apply(OptionMenu, (self, variable5) + tuple(Item_type[4]))
         select1.place(x=140, y=358)
 
-        global var1
-        var1 = StringVar(self)
-        var1.set(0)
-        global var2
-        var2 = StringVar(self)
-        var2.set(0)
-        global var3
-        var3 = StringVar(self)
-        var3.set(0)
-        global var4
-        var4 = StringVar(self)
-        var4.set(0)
-        global var5
-        var5 = StringVar(self)
-        var5.set(0)
+        self.vars = []
+        for i in range(self.height):
+            var = StringVar()
+            var.set(0)
+            self.vars.append(var)
 
-        b1 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=self.In1)
+        global var1, var2, var3, var4, var5
+        var1 = self.vars[0]
+        var2 = self.vars[1]
+        var3 = self.vars[2]
+        var4 = self.vars[3]
+        var5 = self.vars[4]
+
+        b1 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(1))
         b1.place(height=30, width=30, x=700, y=80)
 
-        label1 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
+        label1 = Label(self, textvariable=self.vars[0], font=BUTTON_FONT, relief=RAISED)
         label1.place(height=30, width=70, x=605, y=80)
 
-        b2 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=self.De1)
+        b2 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(1))
         b2.place(height=30, width=30, x=550, y=80)
 
-        b3 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=self.In2)
+        b3 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(2))
         b3.place(height=30, width=30, x=700, y=150)
 
-        label2 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
+        label2 = Label(self, textvariable=self.vars[1], font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=605, y=150)
 
-        b4 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=self.De2)
+        b4 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(2))
         b4.place(height=30, width=30, x=550, y=150)
 
-        b5 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=self.In3)
+        b5 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(3))
         b5.place(height=30, width=30, x=700, y=220)
 
-        label3 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
+        label3 = Label(self, textvariable=self.vars[2], font=BUTTON_FONT, relief=RAISED)
         label3.place(height=30, width=70, x=605, y=220)
 
-        b6 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=self.De3)
+        b6 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(3))
         b6.place(height=30, width=30, x=550, y=220)
 
-        b7 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=self.In4)
+        b7 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(4))
         b7.place(height=30, width=30, x=700, y=290)
 
-        label4 = Label(self, textvariable=var4, font=BUTTON_FONT, relief=RAISED)
+        label4 = Label(self, textvariable=self.vars[3], font=BUTTON_FONT, relief=RAISED)
         label4.place(height=30, width=70, x=605, y=290)
 
-        b8 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=self.De4)
+        b8 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(4))
         b8.place(height=30, width=30, x=550, y=290)
 
-        b9 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=self.In5)
+        b9 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(5))
         b9.place(height=30, width=30, x=700, y=360)
 
-        label5 = Label(self, textvariable=var5, font=BUTTON_FONT, relief=RAISED)
+        label5 = Label(self, textvariable=self.vars[4], font=BUTTON_FONT, relief=RAISED)
         label5.place(height=30, width=70, x=605, y=360)
 
-        b10 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=self.De5)
+        b10 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(5))
         b10.place(height=30, width=30, x=550, y=360)
 
         button1 = tk.Button(self, text="Go to the start page", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("StartPage"))
         button1.place(x=20, y=460)
-        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=self.checkuser)
+        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=lambda :controller.CheckUser())
         button2.place(x=700, y=460)
 
+<<<<<<< HEAD
     def In1(self):
         self.count1 += 1
         count1p2 = self.count1
@@ -298,6 +366,8 @@ class PageOne(tk.Frame):
         else:
             self.controller.show_frame("PageTwo")
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 class PageTwo(tk.Frame):
 
@@ -306,8 +376,9 @@ class PageTwo(tk.Frame):
         self.controller = controller
         notsure = tk.Button(self, text="Not sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
         notsure.place(x=20, y=460)
-        sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
+        sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=self.warning)
         sure.place(x=700, y=460)
+<<<<<<< HEAD
 # <<<<<<< HEAD
         # global var6
         # var6 = StringVar(self)
@@ -332,10 +403,13 @@ class PageTwo(tk.Frame):
 
         #if()
 
+=======
+>>>>>>> refs/remotes/origin/master
         label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
         label1.place(height=30, width=70, x=100, y=80)
         label6 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
         label6.place(height=30, width=70, x=350, y=80)
+<<<<<<< HEAD
 
 # =======
         global var6
@@ -360,20 +434,32 @@ class PageTwo(tk.Frame):
             label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
             label6.place(height=30, width=70, x=350, y=80)
 # >>>>>>> refs/remotes/origin/master
+=======
+>>>>>>> refs/remotes/origin/master
         label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=100, y=150)
         label7 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
         label7.place(height=30, width=70, x=350, y=150)
+<<<<<<< HEAD
 
         label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
         label3.place(height=30, width=70, x=100, y=220)
 # <<<<<<< HEAD
         label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
 # =======
+=======
+        label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
+        label3.place(height=30, width=70, x=100, y=220)
+        label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
+        label8.place(height=30, width=70, x=350, y=220)
+>>>>>>> refs/remotes/origin/master
         label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
         label4.place(height=30, width=70, x=100, y=290)
+        label9 = Label(self, textvariable=var4, font=BUTTON_FONT, relief=RAISED)
+        label9.place(height=30, width=70, x=350, y=290)
         label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
         label5.place(height=30, width=70, x=100, y=360)
+<<<<<<< HEAD
 
         label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
         label7.place(height=30, width=70, x=350, y=150)
@@ -391,6 +477,27 @@ class PageTwo(tk.Frame):
         # label10 = Label(self, textvariable=var10, font=BUTTON_FONT, relief=RAISED)
         # label10.place(height=30, width=70, x=350, y=360)
 
+
+=======
+        label10 = Label(self, textvariable=var5, font=BUTTON_FONT, relief=RAISED)
+        label10.place(height=30, width=70, x=350, y=360)
+>>>>>>> refs/remotes/origin/master
+
+    def warning(self):
+        ans = tkMessageBox.askquestion("Warning","Please use keycard")
+        if ans == "yes":
+            win = []
+            win.append(variable1.get())
+            win.append(var1.get())
+            win.append(variable2.get())
+            win.append(var2.get())
+            win.append(variable3.get())
+            win.append(var3.get())
+            win.append(variable4.get())
+            win.append(var4.get())
+            win.append(variable5.get())
+            win.append(var5.get())
+            print win
 
 
 #Worawit Code(Bank)
@@ -453,10 +560,10 @@ class Admin(tk.Frame):
                 value_type = x[0]
                 value_name = x[1]
                 value_numall = x[2]
-                D.ic(value_type, value_name)
-                D.Commit()
-                D.machine(value_numall)
-                D.Commit()
+                Database.ic(value_type, value_name)
+                Database.Commit()
+                Database.machine(value_numall)
+                Database.Commit()
              else:
                 self.msg.configure(text="Nothing to Add")
 
@@ -485,3 +592,8 @@ class RFID(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
+
+
+
+
+
