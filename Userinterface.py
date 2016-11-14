@@ -43,11 +43,38 @@ class UserInterface(tk.Tk):
         self.show_frame("StartPage")
 
     def show_frame(self, page_name):
-        '''for frame in self.frames.values():
-            frame.grid_remove()'''
-
         frame = self.frames[page_name]
         frame.tkraise()
+
+    def CheckUser(self):
+        if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get()\
+                == str(0) and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() \
+                == str("Default") and variable4.get() == str("Default") and variable5.get() == str("Default"):
+            tkMessageBox.showwarning("WARNING!", "Please select at least one")
+        if variable1.get() != str("Default") and var1.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
+        if variable2.get() != str("Default") and var2.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable2.get()+" do you want?")
+        if variable3.get() != str("Default") and var3.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
+        if variable4.get() != str("Default") and var4.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
+        if variable5.get() != str("Default") and var5.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
+        if variable1.get() == str("Default") and var1.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
+        if variable2.get() == str("Default") and var2.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
+        if variable3.get() == str("Default") and var3.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
+        if variable4.get() == str("Default") and var4.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
+        if variable5.get() == str("Default") and var5.get() != str(0):
+            tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
+        if (variable1.get() != str("Default") and var1.get() != str(0)) or (variable2.get() != str("Default") and \
+            var2.get() != str(0)) or (variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get() \
+            != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)):
+            self.show_frame("PageTwo")
 
 
 class StartPage(tk.Frame):
@@ -80,6 +107,7 @@ class StartPage(tk.Frame):
         button.pack(side=BOTTOM, fill='x')
         admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("Admin"))
         admin.place(x=5,y=10)
+
 
 class PageOne(tk.Frame):
     count1 = 0
@@ -152,6 +180,21 @@ class PageOne(tk.Frame):
         global var5
         var5 = StringVar(self)
         var5.set(0)
+        global var6
+        var6 = StringVar(self)
+        var6.set(0)
+        global var7
+        var7 = StringVar(self)
+        var7.set(0)
+        global var8
+        var8 = StringVar(self)
+        var8.set(0)
+        global var9
+        var9 = StringVar(self)
+        var9.set(0)
+        global var10
+        var10 = StringVar(self)
+        var10.set(0)
 
         b1 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=self.In1)
         b1.place(height=30, width=30, x=700, y=80)
@@ -201,7 +244,7 @@ class PageOne(tk.Frame):
         button1 = tk.Button(self, text="Go to the start page", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("StartPage"))
         button1.place(x=20, y=460)
-        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=self.checkuser)
+        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=lambda :controller.CheckUser())
         button2.place(x=700, y=460)
 
     def In1(self):
@@ -264,31 +307,6 @@ class PageOne(tk.Frame):
         var5.set(self.count5)
         var10.set(self.count5)
 
-    def checkuser(self):
-        if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get() == str(0)\
-            and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() == str("Default")\
-            and variable4.get() == str("Default") and variable5.get() == str("Default"):
-            tkMessageBox.showwarning("WARNING!", "Please select at least one")
-        if variable1.get() != str("Default") and var1.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
-        if variable2.get() != str("Default") and var2.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable2.get()+" do you want?")
-        if variable3.get() != str("Default") and var3.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
-        if variable4.get() != str("Default") and var4.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
-        if variable5.get() != str("Default") and var5.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
-        if variable1.get() == str("Default") and var1.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
-        if variable2.get() == str("Default") and var2.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
-        if variable3.get() == str("Default") and var3.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
-        if variable4.get() == str("Default") and var4.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
-        if variable5.get() == str("Default") and var5.get() != str(0):
-            tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
@@ -298,44 +316,28 @@ class PageTwo(tk.Frame):
         notsure.place(x=20, y=460)
         sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
         sure.place(x=700, y=460)
-        global var6
-        var6 = StringVar(self)
-        var6.set(0)
-        global var7
-        var7 = StringVar(self)
-        var7.set(0)
-        global var8
-        var8 = StringVar(self)
-        var8.set(0)
-        global var9
-        var9 = StringVar(self)
-        var9.set(0)
-        global var10
-        var10 = StringVar(self)
-        var10.set(0)
 
-        if variable1.get() != str("Default") and var1.get() != str(0):
-            label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
-            label1.place(height=30, width=70, x=100, y=80)
-            label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
-            label6.place(height=30, width=70, x=350, y=80)
+        label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
+        label1.place(height=30, width=70, x=100, y=80)
+        label6 = Label(self, textvariable=var6, font=BUTTON_FONT, relief=RAISED)
+        label6.place(height=30, width=70, x=350, y=80)
         label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=100, y=150)
-        label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
-        label3.place(height=30, width=70, x=100, y=220)
-        label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
-        label4.place(height=30, width=70, x=100, y=290)
-        label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
-        label5.place(height=30, width=70, x=100, y=360)
-
         label7 = Label(self, textvariable=var7, font=BUTTON_FONT, relief=RAISED)
         label7.place(height=30, width=70, x=350, y=150)
+        label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
+        label3.place(height=30, width=70, x=100, y=220)
         label8 = Label(self, textvariable=var8, font=BUTTON_FONT, relief=RAISED)
         label8.place(height=30, width=70, x=350, y=220)
+        label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
+        label4.place(height=30, width=70, x=100, y=290)
         label9 = Label(self, textvariable=var9, font=BUTTON_FONT, relief=RAISED)
         label9.place(height=30, width=70, x=350, y=290)
+        label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
+        label5.place(height=30, width=70, x=100, y=360)
         label10 = Label(self, textvariable=var10, font=BUTTON_FONT, relief=RAISED)
         label10.place(height=30, width=70, x=350, y=360)
+
 
 #Worawit Code(Bank)
 class Admin(tk.Frame):
@@ -406,3 +408,20 @@ class Admin(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
+
+#variable1 คือ ค่าในlistของD_TYPE = ["Default", "741G374", "74HC74"]
+#variable2 คือ ค่าในlistของJK_TYPE = ["Default", "DM7473", "DM7476"]
+#variable3 คือ ค่าในlistของAND_GATE = ["Default", "74HC08", "DM7411"]
+#variable4 คือ ค่าในlistของNAND_GATE = ["Default", "74LS10", "74LS13"]
+#variable5 คือ ค่าในlistของOR_GATE = ["Default", "DM74LS32", "741G32"]
+#var1 = var6 คือ จำนวนICชนิดD-Typeที่Userทำการเลือก
+#var2 = var7 คือ จำนวนICชนิดJK-Typeที่Userทำการเลือก
+#var3 = var8 คือ จำนวนICชนิดAND_GATEที่Userทำการเลือก
+#var4 = var9 คือ จำนวนICชนิดOR_GATEที่Userทำการเลือก
+#var5 = var10 คือ จำนวนICชนิดNAND_GATEที่Userทำการเลือก
+#เวลาดึงไปใช้ก็ใช้คำสั่ง .get()ดึงไปใช้ได้เลย
+
+
+
+
+
