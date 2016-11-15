@@ -3,11 +3,6 @@ import tkMessageBox
 import Tkinter as tk
 import Tkinter
 import tkMessageBox
-<<<<<<< HEAD
-from Tkinter import *
-
-=======
->>>>>>> refs/remotes/origin/master
 #from Class import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
@@ -19,20 +14,6 @@ font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
 Item_type = [["Default", "741G374", "74HC74"], ["Default", "DM7473", "DM7476"], ["Default", "74HC08", "DM7411"],
              ["Default", "74LS10", "74LS13"], ["Default", "DM74LS32", "741G32"]]
-<<<<<<< HEAD
-
-D_TYPE = ["Default", "741G374", "74HC74"]
-'''
-JK_TYPE = ["Default", "DM7473", "DM7476"]
-AND_GATE = ["Default", "74HC08", "DM7411"]
-NAND_GATE = ["Default", "74LS10", "74LS13"]
-OR_GATE = ["Default", "DM74LS32", "741G32"]'''
-
-global item
-item = []
-
-=======
->>>>>>> refs/remotes/origin/master
 #Sorawis code(Arm)
 #variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
 #variable2 - data in list of JK_TYPE = ["Default", "DM7473", "DM7476"]
@@ -128,18 +109,6 @@ class UserInterface(tk.Tk):
         x = tkMessageBox.askquestion("Are you sure","Do you want to go to verify page?")
         if x == "yes":
             self.show_frame("PageTwo")
-            item.append(variable1.get())
-            item.append(var1.get())
-            item.append(variable2.get())
-            item.append(var2.get())
-            item.append(variable3.get())
-            item.append(var3.get())
-            item.append(variable4.get())
-            item.append(var4.get())
-            item.append(variable5.get())
-            item.append(var5.get())
-            print item
-
 
     def In(self, num):
         count[num - 1] += 1
@@ -323,15 +292,8 @@ class PageOne(tk.Frame):
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/master
-=======
 
 
->>>>>>> refs/remotes/origin/master
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -373,51 +335,6 @@ class PageTwo(tk.Frame):
         notsure.place(x=20, y=460)
         sure = tk.Button(self, text="sure", bg="OliveDrab2", font=BUTTON_FONT, command=self.Show_Product)
         sure.place(x=700, y=460)
-<<<<<<< HEAD
-
-        label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
-        label1.place(height=30, width=70, x=100, y=80)
-        label6 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
-        label6.place(height=30, width=70, x=350, y=80)
-
-        label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
-        label2.place(height=30, width=70, x=100, y=150)
-        label7 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
-        label7.place(height=30, width=70, x=350, y=150)
-        label3 = Label(self, textvariable=variable3, font=BUTTON_FONT, relief=RAISED)
-        label3.place(height=30, width=70, x=100, y=220)
-        label8 = Label(self, textvariable=var3, font=BUTTON_FONT, relief=RAISED)
-        label8.place(height=30, width=70, x=350, y=220)
-        label4 = Label(self, textvariable=variable4, font=BUTTON_FONT, relief=RAISED)
-        label4.place(height=30, width=70, x=100, y=290)
-        label9 = Label(self, textvariable=var4, font=BUTTON_FONT, relief=RAISED)
-        label9.place(height=30, width=70, x=350, y=290)
-        label5 = Label(self, textvariable=variable5, font=BUTTON_FONT, relief=RAISED)
-        label5.place(height=30, width=70, x=100, y=360)
-        label10 = Label(self, textvariable=var5, font=BUTTON_FONT, relief=RAISED)
-        label10.place(height=30, width=70, x=350, y=360)
-
-        w = Message(self, text=item[0])
-        w.pack()
-
-
-    def warning(self):
-        ans = tkMessageBox.askquestion("Warning","Please use keycard")
-        if ans == "yes":
-            win = []
-            win.append(variable1.get())
-            win.append(var1.get())
-            win.append(variable2.get())
-            win.append(var2.get())
-            win.append(variable3.get())
-            win.append(var3.get())
-            win.append(variable4.get())
-            win.append(var4.get())
-            win.append(variable5.get())
-            win.append(var5.get())
-            print win
-=======
->>>>>>> refs/remotes/origin/master
 
     def Show_Product(self):
         answer = tkMessageBox.askquestion("Verify","Please use your keycard")
@@ -531,6 +448,3 @@ class RFID(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
-
-
-
