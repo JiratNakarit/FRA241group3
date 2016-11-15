@@ -409,6 +409,7 @@ class Admin(tk.Frame):
                 value_type = x[0]
                 value_name = x[1]
                 value_numall = x[2]
+
                 Database.ic(value_type, value_name)
                 Database.Commit()
                 Database.machine(value_numall)
