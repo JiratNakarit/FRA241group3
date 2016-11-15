@@ -14,6 +14,7 @@ font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
 Item_type = [["Default", "741G374", "74HC74"], ["Default", "DM7473", "DM7476"], ["Default", "74HC08", "DM7411"],
              ["Default", "74LS10", "74LS13"], ["Default", "DM74LS32", "741G32"]]
+Type = ["D-Type","JK-Type","AND_GATE","OR_GATE","NAND_GATE"]
 
 #Sorawis code(Arm)
 #variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
@@ -175,7 +176,7 @@ class StartPage(tk.Frame):
 
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
-        self.height = 5
+        self.height = 7
         tk.Frame.__init__(self, parent)
         self.controller = controller
         scrollbar = Scrollbar(self)
@@ -185,7 +186,7 @@ class PageOne(tk.Frame):
         elec_type = tk.Label(self, text="Integrated Circuit(IC)", fg='SystemWindow', font='times 18 underline')
         elec_type.place(x=5, y=55)
         ic_type1 = tk.Label(self, text="D - Type", fg='SystemWindow', font=IC_FONT)
-        ic_type1.place(x=25, y=100)
+        '''ic_type1.place(x=25, y=100)
         ic_type2 = tk.Label(self, text="JK - Type",  fg='SystemWindow', font=IC_FONT)
         ic_type2.place(x=25, y=170)
         ic_type3 = tk.Label(self, text="AND - GATE",  fg='SystemWindow', font=IC_FONT)
@@ -193,7 +194,13 @@ class PageOne(tk.Frame):
         ic_type4 = tk.Label(self, text="OR - GATE",  fg='SystemWindow', font=IC_FONT)
         ic_type4.place(x=25, y=310)
         ic_type5 = tk.Label(self, text="NAND - GATE",  fg='SystemWindow', font=IC_FONT)
-        ic_type5.place(x=25, y=380)
+        ic_type5.place(x=25, y=380)'''
+        self.y = 100
+        for i in range(self.height):
+            ic_type1 = tk.Label(self, text=Type[i], fg='SystemWindow', font=IC_FONT)
+            ic_type1.place(x=25, y=self.y)
+            self.y += 70
+
 
         self.variables = []
         self.nup = 0
