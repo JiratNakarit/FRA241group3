@@ -4,7 +4,7 @@ import MySQLdb
 
 class Database:
     def __init__(self):
-        self.db = MySQLdb.connect(host="localhost", user="root", passwd="fra241", db="test")
+        self.db = MySQLdb.connect(host="localhost", user="root", passwd="", db="fra241")
         self.cursor = self.db.cursor()
 
     def Update(self,icid,numall):
@@ -59,15 +59,6 @@ class Database:
         list_column = self.includeColumn(data)
         if column != "*":
             return list_column[column]
-        else:
-            return list_column
-
-    def data_machine(self, cursor, column):
-        cursor.execute(self.getData("machine", "*"))
-        data = cursor.fetchall()
-        list_column = self.includeColumn(data)
-        if column != "*":
-            return list_column[column - 1]
         else:
             return list_column
 
