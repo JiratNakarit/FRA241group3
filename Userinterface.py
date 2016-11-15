@@ -12,11 +12,6 @@ BUTTON_FONT = ("Helvetica", 12, "bold")
 TYPE_FONT = ("Helvetica", 15, "bold")
 font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
-#D_TYPE = ["Default", "741G374", "74HC74"]
-#JK_TYPE = ["Default", "DM7473", "DM7476"]
-#AND_GATE = ["Default", "74HC08", "DM7411"]
-#NAND_GATE = ["Default", "74LS10", "74LS13"]
-#OR_GATE = ["Default", "DM74LS32", "741G32"]
 Item_type = [["Default", "741G374", "74HC74"], ["Default", "DM7473", "DM7476"], ["Default", "74HC08", "DM7411"],
              ["Default", "74LS10", "74LS13"], ["Default", "DM74LS32", "741G32"]]
 #Sorawis code(Arm)
