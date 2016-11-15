@@ -3,6 +3,7 @@ import tkMessageBox
 import Tkinter as tk
 import Tkinter
 import tkMessageBox
+#from Class import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -408,10 +409,10 @@ class Admin(tk.Frame):
                 value_type = x[0]
                 value_name = x[1]
                 value_numall = x[2]
-                D.ic(value_type, value_name)
-                D.Commit()
-                D.machine(value_numall)
-                D.Commit()
+                Database.ic(value_type, value_name)
+                Database.Commit()
+                Database.machine(value_numall)
+                Database.Commit()
              else:
                 self.msg.configure(text="Nothing to Add")
 

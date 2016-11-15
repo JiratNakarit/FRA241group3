@@ -28,6 +28,6 @@ class UpDown_num:
     def Close(self):
         # disconnect from server
         self.db.close()
-D = UpDown_num()
+Database = UpDown_num()
 
 
