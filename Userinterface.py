@@ -28,14 +28,16 @@ Item_type = [["Default", "741G374", "74HC74"], ["Default", "DM7473", "DM7476"], 
 #you can use .get() to see data of variable
 
 class UserInterface(tk.Tk):
+    global count
     count = [0,0,0,0,0]
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
+
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
         # will be raised above the others
-        container = tk.Frame(*args, borderwidth=30, bg='Dodger Blue4', **kwargs)
+        container = tk.Frame(*args, borderwidth=20, bg='Dodger Blue2', **kwargs)
         container.option_add("*background", "Dodger Blue2")
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1, minsize=300)
@@ -101,37 +103,42 @@ class UserInterface(tk.Tk):
             var2.get() != str(0)) or (variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get() \
             != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)))\
             and (error == 0):
+            self.verify()
+
+    def verify(self):
+        x = tkMessageBox.askquestion("Are you sure","Do you want to go to verify page?")
+        if x == "yes":
             self.show_frame("PageTwo")
 
     def In(self, num):
-        self.count[num - 1] += 1
+        count[num - 1] += 1
         if (num == 1):
-            var1.set(self.count[num - 1])
+            var1.set(count[num - 1])
         elif (num == 2):
-            var2.set(self.count[num - 1])
+            var2.set(count[num - 1])
         elif (num == 3):
-            var3.set(self.count[num - 1])
+            var3.set(count[num - 1])
         elif (num == 4):
-            var4.set(self.count[num - 1])
+            var4.set(count[num - 1])
         elif (num == 5):
-            var5.set(self.count[num - 1])
-        print self.count
+            var5.set(count[num - 1])
+        print count
 
     def De(self, num):
-        self.count[num - 1] -= 1
-        if self.count[num - 1] <= 0:
-            self.count[num - 1] = 0
+        count[num - 1] -= 1
+        if count[num - 1] <= 0:
+            count[num - 1] = 0
         if (num == 1):
-            var1.set(self.count[num - 1])
+            var1.set(count[num - 1])
         elif (num == 2):
-            var2.set(self.count[num - 1])
+            var2.set(count[num - 1])
         elif (num == 3):
-            var3.set(self.count[num - 1])
+            var3.set(count[num - 1])
         elif (num == 4):
-            var4.set(self.count[num - 1])
+            var4.set(count[num - 1])
         elif (num == 5):
-            var5.set(self.count[num - 1])
-        print self.count
+            var5.set(count[num - 1])
+        print count
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -201,6 +208,7 @@ class PageOne(tk.Frame):
         variable3 = self.variables[2]
         variable4 = self.variables[3]
         variable5 = self.variables[4]
+
 
         select1 = apply(OptionMenu, (self, variable1) + tuple(Item_type[0]))
         select1.config(bg = "pale green")
@@ -284,12 +292,15 @@ class PageOne(tk.Frame):
 
 
 
+
+
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label_2ndtitle = tk.Label(self, text="Check your Order", fg='SystemWindow', font='times 40 underline')
+        label_2ndtitle = tk.Label(self, text="This is your order", fg='SystemWindow', font='times 40 underline')
         label_2ndtitle.pack(side="top", fill="x", pady=0)
+
         name1 = Label(self, textvariable=variable1, font=BUTTON_FONT, bg='pale green', relief=RAISED)
         name1.place(height=30, width=70, x=85, y=100)
         number1 = Label(self, textvariable=var1, font=BUTTON_FONT, bg='lavender', relief=RAISED)
