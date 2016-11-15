@@ -19,6 +19,11 @@ class Database:
     def machine(self,value_numall):
         self.sql = "INSERT INTO `machine`(`numall`) VALUES" + " " + "('%d')" % (value_numall)
 
+    def machine_user(self,value_numall):
+        self.sql = "INSERT INTO `machine`(`numall`) VALUES" - " " + "('%d')" % (value_numall)
+
+
+
     def Commit(self):
 
             # Execute the SQL command
