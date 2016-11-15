@@ -4,7 +4,7 @@ import MySQLdb
 
 class Database:
     def __init__(self):
-        self.db = MySQLdb.connect(host="localhost", user="root", passwd="", db="fra241")
+        self.db = MySQLdb.connect(host="localhost", user="root", passwd="fra241", db="test")
         self.cursor = self.db.cursor()
 
     def Update(self,icid,numall):
@@ -18,6 +18,11 @@ class Database:
 
     def machine(self,value_numall):
         self.sql = "INSERT INTO `machine`(`numall`) VALUES" + " " + "('%d')" % (value_numall)
+
+    def machine_user(self,value_numall):
+        self.sql = "INSERT INTO `machine`(`numall`) VALUES" - " " + "('%d')" % (value_numall)
+
+
 
     def Commit(self):
 
@@ -61,6 +66,7 @@ class Database:
             return list_column[column]
         else:
             return list_column
+
 
     def data_ic(self, cursor, column):
         cursor.execute(self.getData("ic", "*"))
