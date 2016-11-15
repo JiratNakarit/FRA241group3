@@ -19,6 +19,11 @@ class Database:
     def machine(self,value_numall):
         self.sql = "INSERT INTO `machine`(`numall`) VALUES" + " " + "('%d')" % (value_numall)
 
+    def machine_user(self,value_numall):
+        self.sql = "INSERT INTO `machine`(`numall`) VALUES" - " " + "('%d')" % (value_numall)
+
+
+
     def Commit(self):
 
             # Execute the SQL command
@@ -62,14 +67,6 @@ class Database:
         else:
             return list_column
 
-    def data_machine(self, cursor, column):
-        cursor.execute(self.getData("machine", "*"))
-        data = cursor.fetchall()
-        list_column = self.includeColumn(data)
-        if column != "*":
-            return list_column[column - 1]
-        else:
-            return list_column
 
     def data_ic(self, cursor, column):
         cursor.execute(self.getData("ic", "*"))
