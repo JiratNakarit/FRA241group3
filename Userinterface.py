@@ -3,7 +3,7 @@ import Tkinter
 import tkMessageBox
 from Tkinter import *
 
-from Class import *
+#from Class import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -22,6 +22,9 @@ JK_TYPE = ["Default", "DM7473", "DM7476"]
 AND_GATE = ["Default", "74HC08", "DM7411"]
 NAND_GATE = ["Default", "74LS10", "74LS13"]
 OR_GATE = ["Default", "DM74LS32", "741G32"]'''
+
+global item
+item = []
 
 #Sorawis code(Arm)
 #variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
@@ -94,6 +97,18 @@ class UserInterface(tk.Tk):
             tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
         else:
             self.show_frame("PageTwo")
+            item.append(variable1.get())
+            item.append(var1.get())
+            item.append(variable2.get())
+            item.append(var2.get())
+            item.append(variable3.get())
+            item.append(var3.get())
+            item.append(variable4.get())
+            item.append(var4.get())
+            item.append(variable5.get())
+            item.append(var5.get())
+            print item
+
 
     def In(self, num):
         self.count[num - 1] += 1
@@ -271,6 +286,8 @@ class PageOne(tk.Frame):
         button2.place(x=700, y=460)
 
 
+
+
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -279,10 +296,12 @@ class PageTwo(tk.Frame):
         notsure.place(x=20, y=460)
         sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=self.warning)
         sure.place(x=700, y=460)
+
         label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
         label1.place(height=30, width=70, x=100, y=80)
         label6 = Label(self, textvariable=var1, font=BUTTON_FONT, relief=RAISED)
         label6.place(height=30, width=70, x=350, y=80)
+
         label2 = Label(self, textvariable=variable2, font=BUTTON_FONT, relief=RAISED)
         label2.place(height=30, width=70, x=100, y=150)
         label7 = Label(self, textvariable=var2, font=BUTTON_FONT, relief=RAISED)
@@ -299,6 +318,10 @@ class PageTwo(tk.Frame):
         label5.place(height=30, width=70, x=100, y=360)
         label10 = Label(self, textvariable=var5, font=BUTTON_FONT, relief=RAISED)
         label10.place(height=30, width=70, x=350, y=360)
+
+        w = Message(self, text=item[0])
+        w.pack()
+
 
     def warning(self):
         ans = tkMessageBox.askquestion("Warning","Please use keycard")
