@@ -72,7 +72,7 @@ class UserInterface(tk.Tk):
                 == str(0) and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() \
                 == str("Default") and variable4.get() == str("Default") and variable5.get() == str("Default"):
             tkMessageBox.showwarning("WARNING!", "Please select at least one")
-        if variable1.get() != str("Default") and var1.get() == str(0):
+        elif variable1.get() != str("Default") and var1.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
         elif variable2.get() != str("Default") and var2.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many " + variable2.get() + " do you want?", )
