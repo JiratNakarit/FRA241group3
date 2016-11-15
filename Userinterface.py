@@ -418,7 +418,7 @@ class Admin(tk.Frame):
 
                 Database.ic(value_type, value_name)
                 Database.Commit()
-                Database.machine(value_numall)
+                Database.machine_user(value_numall)
                 Database.Commit()
              else:
                 self.msg.configure(text="Nothing to Add")
