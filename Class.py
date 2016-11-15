@@ -62,14 +62,6 @@ class Database:
         else:
             return list_column
 
-    def data_machine(self, cursor, column):
-        cursor.execute(self.getData("machine", "*"))
-        data = cursor.fetchall()
-        list_column = self.includeColumn(data)
-        if column != "*":
-            return list_column[column - 1]
-        else:
-            return list_column
 
     def data_ic(self, cursor, column):
         cursor.execute(self.getData("ic", "*"))
