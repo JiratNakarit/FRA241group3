@@ -1,8 +1,13 @@
+from Tkinter import *
+import tkMessageBox
 import Tkinter as tk
 import Tkinter
 import tkMessageBox
+<<<<<<< HEAD
 from Tkinter import *
 
+=======
+>>>>>>> refs/remotes/origin/master
 #from Class import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
@@ -12,9 +17,9 @@ BUTTON_FONT = ("Helvetica", 12, "bold")
 TYPE_FONT = ("Helvetica", 15, "bold")
 font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
-
 Item_type = [["Default", "741G374", "74HC74"], ["Default", "DM7473", "DM7476"], ["Default", "74HC08", "DM7411"],
              ["Default", "74LS10", "74LS13"], ["Default", "DM74LS32", "741G32"]]
+<<<<<<< HEAD
 
 D_TYPE = ["Default", "741G374", "74HC74"]
 '''
@@ -26,6 +31,8 @@ OR_GATE = ["Default", "DM74LS32", "741G32"]'''
 global item
 item = []
 
+=======
+>>>>>>> refs/remotes/origin/master
 #Sorawis code(Arm)
 #variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
 #variable2 - data in list of JK_TYPE = ["Default", "DM7473", "DM7476"]
@@ -40,18 +47,18 @@ item = []
 #you can use .get() to see data of variable
 
 class UserInterface(tk.Tk):
-    count = [0, 0, 0, 0, 0]
+    count = [0,0,0,0,0]
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
         # will be raised above the others
-        container = tk.Frame(*args, borderwidth=20, bg='orange', **kwargs)
+        container = tk.Frame(*args, borderwidth=30, bg='Dodger Blue4', **kwargs)
+        container.option_add("*background", "Dodger Blue2")
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1, minsize=300)
         container.grid_columnconfigure(0, weight=1, minsize=500)
-
 
         self.frames = {}
         for F in (StartPage, PageOne, PageTwo, Admin,RFID):
@@ -71,31 +78,48 @@ class UserInterface(tk.Tk):
         frame.tkraise()
 
     def CheckUser(self):
+        global state
+        global error
+        error = 0
         if var1.get() == str(0) and var2.get() == str(0) and var3.get() == str(0) and var4.get() == str(0) and var5.get()\
                 == str(0) and variable1.get() == str("Default") and variable2.get() == str("Default") and variable3.get() \
                 == str("Default") and variable4.get() == str("Default") and variable5.get() == str("Default"):
             tkMessageBox.showwarning("WARNING!", "Please select at least one")
-        elif variable1.get() != str("Default") and var1.get() == str(0):
+            error += 1
+        if variable1.get() != str("Default") and var1.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable1.get()+" do you want?")
-        elif variable2.get() != str("Default") and var2.get() == str(0):
-            tkMessageBox.showwarning("WARNING!", message="How many " + variable2.get() + " do you want?", )
-        elif variable3.get() != str("Default") and var3.get() == str(0):
+            error += 1
+        if variable2.get() != str("Default") and var2.get() == str(0):
+            tkMessageBox.showwarning("WARNING!", message="How many "+variable2.get()+" do you want?")
+            error += 1
+        if variable3.get() != str("Default") and var3.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable3.get()+" do you want?")
-        elif variable4.get() != str("Default") and var4.get() == str(0):
+            error += 1
+        if variable4.get() != str("Default") and var4.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable4.get()+" do you want?")
-        elif variable5.get() != str("Default") and var5.get() == str(0):
+            error += 1
+        if variable5.get() != str("Default") and var5.get() == str(0):
             tkMessageBox.showwarning("WARNING!", message="How many "+variable5.get()+" do you want?")
-        elif variable1.get() == str("Default") and var1.get() != str(0):
+            error += 1
+        if variable1.get() == str("Default") and var1.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of D-Type do you want?")
-        elif variable2.get() == str("Default") and var2.get() != str(0):
+            error += 1
+        if variable2.get() == str("Default") and var2.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of JK-Type do you want?")
-        elif variable3.get() == str("Default") and var3.get() != str(0):
+            error += 1
+        if variable3.get() == str("Default") and var3.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of AND-GATE do you want?")
-        elif variable4.get() == str("Default") and var4.get() != str(0):
+            error += 1
+        if variable4.get() == str("Default") and var4.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC of OR-GATE do you want?")
-        elif variable5.get() == str("Default") and var5.get() != str(0):
+            error += 1
+        if variable5.get() == str("Default") and var5.get() != str(0):
             tkMessageBox.showwarning("WARNING!", message="What IC NAND-GATE do you want?")
-        else:
+            error += 1
+        if ((variable1.get() != str("Default") and var1.get() != str(0)) or (variable2.get() != str("Default") and \
+            var2.get() != str(0)) or (variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get() \
+            != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)))\
+            and (error == 0):
             self.show_frame("PageTwo")
             item.append(variable1.get())
             item.append(var1.get())
@@ -144,7 +168,7 @@ class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label_1sttitle = tk.Label(self, text="How to use this machine", font=TITLE1_FONT)
+        label_1sttitle = tk.Label(self, text="How to use this machine", fg='SystemWindow', font='times 40 underline')
         label_1sttitle.pack(side="top", fill="x", pady=0)
         label_1st = tk.Label(self,
                              text="\n\nThe first step of using vending machines, electronic devices allow users to select \n "
@@ -163,37 +187,36 @@ class StartPage(tk.Frame):
                                   "does not have to be finished off.\n\n"
                                   "Finally If the user wants to check your history. You can also check that each device \n "
                                   "inside the electronics remaining amount.\n\n\n\n"
-                             , font=EXPLAND_FONT)
+                             , fg='SystemWindow', font=EXPLAND_FONT)
         label_1st.pack(side="top", fill="x", padx=100)
-        button = tk.Button(self, text="I'm accept", height=2, font=BUTTON_FONT,
+        button = tk.Button(self, text="I'm accept",bg="OliveDrab2", height=2, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
-        admin = tk.Button(self, text="ADMIN", height=2, font=BUTTON_FONT,command=lambda :controller.show_frame("RFID"))
+        admin = tk.Button(self, text="ADMIN", height=2, bg="salmon", font=BUTTON_FONT,command=lambda :controller.show_frame("RFID"))
         admin.place(x=5,y=10)
 
 
 class PageOne(tk.Frame):
-    height = 5
     def __init__(self, parent, controller):
-
+        self.height = 5
         tk.Frame.__init__(self, parent)
         self.controller = controller
         scrollbar = Scrollbar(self)
         scrollbar.pack(side=RIGHT, fill=Y)
-        label_title = tk.Label(self, text="Choose Your Gift!!", font=TITLE2_FONT)
+        label_title = tk.Label(self, text="What do you want",fg='SystemWindow', font='times 35 underline')
         label_title.pack()
-        elec_type = tk.Label(self, text="Integrated Circuit(IC)", font=TYPE_FONT)
-        elec_type.place(x=5, y=40)
-        ic_type1 = tk.Label(self, text="D - Type", font=IC_FONT)
-        ic_type1.place(x=25, y=80)
-        ic_type2 = tk.Label(self, text="JK - Type", font=IC_FONT)
-        ic_type2.place(x=25, y=150)
-        ic_type3 = tk.Label(self, text="AND - GATE", font=IC_FONT)
-        ic_type3.place(x=25, y=220)
-        ic_type4 = tk.Label(self, text="OR - GATE", font=IC_FONT)
-        ic_type4.place(x=25, y=290)
-        ic_type5 = tk.Label(self, text="NAND - GATE", font=IC_FONT)
-        ic_type5.place(x=25, y=360)
+        elec_type = tk.Label(self, text="Integrated Circuit(IC)", fg='SystemWindow', font='times 18 underline')
+        elec_type.place(x=5, y=55)
+        ic_type1 = tk.Label(self, text="D - Type", fg='SystemWindow', font=IC_FONT)
+        ic_type1.place(x=25, y=100)
+        ic_type2 = tk.Label(self, text="JK - Type",  fg='SystemWindow', font=IC_FONT)
+        ic_type2.place(x=25, y=170)
+        ic_type3 = tk.Label(self, text="AND - GATE",  fg='SystemWindow', font=IC_FONT)
+        ic_type3.place(x=25, y=240)
+        ic_type4 = tk.Label(self, text="OR - GATE",  fg='SystemWindow', font=IC_FONT)
+        ic_type4.place(x=25, y=310)
+        ic_type5 = tk.Label(self, text="NAND - GATE",  fg='SystemWindow', font=IC_FONT)
+        ic_type5.place(x=25, y=380)
 
         self.variables = []
         self.nup = 0
@@ -211,15 +234,20 @@ class PageOne(tk.Frame):
         variable5 = self.variables[4]
 
         select1 = apply(OptionMenu, (self, variable1) + tuple(Item_type[0]))
-        select1.place(x=140, y=78)
-        select1 = apply(OptionMenu, (self, variable2) + tuple(Item_type[1]))
-        select1.place(x=140, y=148)
-        select1 = apply(OptionMenu, (self, variable3) + tuple(Item_type[2]))
-        select1.place(x=140, y=218)
-        select1 = apply(OptionMenu, (self, variable4) + tuple(Item_type[3]))
-        select1.place(x=140, y=288)
-        select1 = apply(OptionMenu, (self, variable5) + tuple(Item_type[4]))
-        select1.place(x=140, y=358)
+        select1.config(bg = "pale green")
+        select1.place(x=150, y=98)
+        select2 = apply(OptionMenu, (self, variable2) + tuple(Item_type[1]))
+        select2.config(bg = "gold")
+        select2.place(x=150, y=168)
+        select3 = apply(OptionMenu, (self, variable3) + tuple(Item_type[2]))
+        select3.config(bg = "maroon4")
+        select3.place(x=150, y=238)
+        select4 = apply(OptionMenu, (self, variable4) + tuple(Item_type[3]))
+        select4.config(bg = "orange red")
+        select4.place(x=150, y=308)
+        select5 = apply(OptionMenu, (self, variable5) + tuple(Item_type[4]))
+        select5.config(bg = "grey20")
+        select5.place(x=150, y=378)
 
         self.vars = []
         for i in range(self.height):
@@ -234,68 +262,104 @@ class PageOne(tk.Frame):
         var4 = self.vars[3]
         var5 = self.vars[4]
 
-        b1 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(1))
-        b1.place(height=30, width=30, x=700, y=80)
+        b1 = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command= lambda :controller.In(1))
+        b1.place(height=30, width=30, x=700, y=100)
 
-        label1 = Label(self, textvariable=self.vars[0], font=BUTTON_FONT, relief=RAISED)
-        label1.place(height=30, width=70, x=605, y=80)
+        label1 = Label(self, textvariable=var1, bg='lavender', font=BUTTON_FONT, relief=RAISED)
+        label1.place(height=30, width=70, x=605, y=100)
 
-        b2 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(1))
-        b2.place(height=30, width=30, x=550, y=80)
+        b2 = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2',  command= lambda :controller.De(1))
+        b2.place(height=30, width=30, x=550, y=100)
 
-        b3 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(2))
-        b3.place(height=30, width=30, x=700, y=150)
+        b3 = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command= lambda :controller.In(2))
+        b3.place(height=30, width=30, x=700, y=170)
 
-        label2 = Label(self, textvariable=self.vars[1], font=BUTTON_FONT, relief=RAISED)
-        label2.place(height=30, width=70, x=605, y=150)
+        label2 = Label(self, textvariable=var2, bg='lavender', font=BUTTON_FONT, relief=RAISED)
+        label2.place(height=30, width=70, x=605, y=170)
 
-        b4 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(2))
-        b4.place(height=30, width=30, x=550, y=150)
+        b4 = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command= lambda :controller.De(2))
+        b4.place(height=30, width=30, x=550, y=170)
 
-        b5 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(3))
-        b5.place(height=30, width=30, x=700, y=220)
+        b5 = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command= lambda :controller.In(3))
+        b5.place(height=30, width=30, x=700, y=240)
 
-        label3 = Label(self, textvariable=self.vars[2], font=BUTTON_FONT, relief=RAISED)
-        label3.place(height=30, width=70, x=605, y=220)
+        label3 = Label(self, textvariable=var3, bg='lavender', font=BUTTON_FONT, relief=RAISED)
+        label3.place(height=30, width=70, x=605, y=240)
 
-        b6 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(3))
-        b6.place(height=30, width=30, x=550, y=220)
+        b6 = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command= lambda :controller.De(3))
+        b6.place(height=30, width=30, x=550, y=240)
 
-        b7 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(4))
-        b7.place(height=30, width=30, x=700, y=290)
+        b7 = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command= lambda :controller.In(4))
+        b7.place(height=30, width=30, x=700, y=310)
 
-        label4 = Label(self, textvariable=self.vars[3], font=BUTTON_FONT, relief=RAISED)
-        label4.place(height=30, width=70, x=605, y=290)
+        label4 = Label(self, textvariable=var4, bg='lavender', font=BUTTON_FONT, relief=RAISED)
+        label4.place(height=30, width=70, x=605, y=310)
 
-        b8 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(4))
-        b8.place(height=30, width=30, x=550, y=290)
+        b8 = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command= lambda :controller.De(4))
+        b8.place(height=30, width=30, x=550, y=310)
 
-        b9 = Button(self, text="+", font=BUTTON_FONT, bg='green', command=lambda: controller.In(5))
-        b9.place(height=30, width=30, x=700, y=360)
+        b9 = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command= lambda :controller.In(5))
+        b9.place(height=30, width=30, x=700, y=380)
 
-        label5 = Label(self, textvariable=self.vars[4], font=BUTTON_FONT, relief=RAISED)
-        label5.place(height=30, width=70, x=605, y=360)
+        label5 = Label(self, textvariable=var5, bg='lavender', font=BUTTON_FONT, relief=RAISED)
+        label5.place(height=30, width=70, x=605, y=380)
 
-        b10 = Button(self, text="-", font=BUTTON_FONT, bg='pink', command=lambda: controller.De(5))
-        b10.place(height=30, width=30, x=550, y=360)
+        b10 = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command= lambda :controller.De(5))
+        b10.place(height=30, width=30, x=550, y=380)
 
-        button1 = tk.Button(self, text="Go to the start page", font=BUTTON_FONT,
+        button1 = tk.Button(self, text="Go to the start page", bg="salmon", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("StartPage"))
         button1.place(x=20, y=460)
-        button2 = tk.Button(self, text="Next", font=BUTTON_FONT, command=lambda :controller.CheckUser())
+        button2 = tk.Button(self, text="Next", bg="OliveDrab2", font=BUTTON_FONT, command=lambda: controller.CheckUser())
         button2.place(x=700, y=460)
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/master
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        notsure = tk.Button(self, text="Not sure", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
+        label_2ndtitle = tk.Label(self, text="Check your Order", fg='SystemWindow', font='times 40 underline')
+        label_2ndtitle.pack(side="top", fill="x", pady=0)
+        name1 = Label(self, textvariable=variable1, font=BUTTON_FONT, bg='pale green', relief=RAISED)
+        name1.place(height=30, width=70, x=85, y=100)
+        number1 = Label(self, textvariable=var1, font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        number1.place(height=30, width=70, x=355, y=100)
+        unit1 = Label(self, text="piece", font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        unit1.place(height=30, width=70, x=625, y=100)
+        name2 = Label(self, textvariable=variable2, font=BUTTON_FONT, bg='gold', relief=RAISED)
+        name2.place(height=30, width=70, x=85, y=170)
+        number2 = Label(self, textvariable=var2, font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        number2.place(height=30, width=70, x=355, y=170)
+        unit2 = Label(self, text="piece", font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        unit2.place(height=30, width=70, x=625, y=170)
+        name3 = Label(self, textvariable=variable3, font=BUTTON_FONT, bg='maroon4', relief=RAISED)
+        name3.place(height=30, width=70, x=85, y=240)
+        number3 = Label(self, textvariable=var3, font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        number3.place(height=30, width=70, x=355, y=240)
+        unit3 = Label(self, text="piece", font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        unit3.place(height=30, width=70, x=625, y=240)
+        name4 = Label(self, textvariable=variable4, font=BUTTON_FONT, bg='orange red', relief=RAISED)
+        name4.place(height=30, width=70, x=85, y=310)
+        number4 = Label(self, textvariable=var4, font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        number4.place(height=30, width=70, x=355, y=310)
+        unit4 = Label(self, text="piece", font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        unit4.place(height=30, width=70, x=625, y=310)
+        name5 = Label(self, textvariable=variable5, font=BUTTON_FONT, bg='grey20', relief=RAISED)
+        name5.place(height=30, width=70, x=85, y=380)
+        number5 = Label(self, textvariable=var5, font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        number5.place(height=30, width=70, x=355, y=380)
+        unit5 = Label(self, text="piece", font=BUTTON_FONT, bg='lavender', relief=RAISED)
+        unit5.place(height=30, width=70, x=625, y=380)
+        notsure = tk.Button(self, text="Not sure", bg="salmon", font=BUTTON_FONT, command=lambda: controller.show_frame("PageOne"))
         notsure.place(x=20, y=460)
-        sure = tk.Button(self, text="sure", font=BUTTON_FONT, command=self.warning)
+        sure = tk.Button(self, text="sure", bg="OliveDrab2", font=BUTTON_FONT, command=self.Show_Product)
         sure.place(x=700, y=460)
+<<<<<<< HEAD
 
         label1 = Label(self, textvariable=variable1, font=BUTTON_FONT, relief=RAISED)
         label1.place(height=30, width=70, x=100, y=80)
@@ -338,10 +402,27 @@ class PageTwo(tk.Frame):
             win.append(variable5.get())
             win.append(var5.get())
             print win
+=======
+>>>>>>> refs/remotes/origin/master
+
+    def Show_Product(self):
+        answer = tkMessageBox.askquestion("Verify","Please use your keycard")
+        if answer == "yes":
+            product=[]
+            product.append(variable1.get())
+            product.append(var1.get())
+            product.append(variable2.get())
+            product.append(var2.get())
+            product.append(variable3.get())
+            product.append(var3.get())
+            product.append(variable4.get())
+            product.append(var4.get())
+            product.append(variable5.get())
+            product.append(var5.get())
+            print product
 
 
 #Worawit Code(Bank)
-
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -356,29 +437,32 @@ class Admin(tk.Frame):
         self.frame4 = Frame(self, pady=10)
         self.frame4.pack()
 
-        Label(self.frame2, text=" Admin", fg='red', font=("Vewdana", '14', 'bold'), height=3).pack()
+        Label(self.frame2, text=" Admin", fg='red', font='times 35 ', height=3).pack()
         Label(self.frame2, text='Type: ', font=font1, width=8).pack(side=LEFT)
         self.type = Entry(self.frame2, width=10, font=font1)
         self.type.focus_force()
+        self.type.config(bg='lavender')
         self.type.pack(side=LEFT)
         Label(self.frame5, text='Name IC: ', font=font1, width=8).pack(side=LEFT)
         self.name = Entry(self.frame5, width=10, font=font1)
         self.name.focus_force()
+        self.name.config(bg='lavender')
         self.name.pack(side=LEFT)
         Label(self.frame3, text='Integer: ', font=font1, width=8).pack(side=LEFT)
         self.Integer = Entry(self.frame3, width=10, font=font1)
+        self.Integer.config(bg='lavender')
         self.Integer.pack(side=LEFT)
-        self.Enter = Button(self, font=font1, text='Enter', bg='green', height=2, command=self.checkadmin,
+        self.Enter = Button(self, font=BUTTON_FONT, text='Enter', bg='OliveDrab2', height=2, width=10, command=self.checkadmin,
                             relief=RAISED,
                             cursor="plus")
-        self.Enter.place(x=700, y=460)
-        self.Back = Button(self, font=font1, height=2, text='Back', bg='red', relief=RAISED, cursor="plus",
+        self.Enter.place(x=645, y=450)
+        self.Back = Button(self, font=BUTTON_FONT, height=2, width=10, text='Back', bg='salmon', relief=RAISED, cursor="plus",
                            command=lambda: controller.show_frame("StartPage"))
-        self.Back.place(x=20, y=460)
-        self.ButtonClear = Button(self.frame4, font=font1, text='Clear your in put', bg='pink', relief=RAISED,
-                                  cursor="plus",command=self.Clear)
+        self.Back.place(x=20, y=450)
+        self.ButtonClear = Button(self.frame4, font=font1, text='Clear your in put', bg='grey20', fg='red2', relief=RAISED,
+                                  cursor="plus", command=self.Clear)
         self.ButtonClear.pack()
-        self.msg = Label(self.frame4, font=font1,  height=3,text='Your in put...')
+        self.msg = Label(self.frame4, font=font1,  height=3, text='Your in put...')
         self.msg.pack()
 
     def Clear(self):
@@ -400,6 +484,7 @@ class Admin(tk.Frame):
                 value_type = x[0]
                 value_name = x[1]
                 value_numall = x[2]
+
                 Database.ic(value_type, value_name)
                 Database.Commit()
                 Database.machine(value_numall)
@@ -416,12 +501,12 @@ class RFID(tk.Frame):
 
         tk.Frame.__init__(self, parent)
 
-        button = tk.Button(self, text=" scan RFID", height=2, font=BUTTON_FONT,
+        button = tk.Button(self, text=" scan RFID", bg='OliveDrab2', height=2,width=15, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("Admin"))
-        button.pack(side=BOTTOM, fill='x')
-
-
-
+        button.place(x=600,y=430)
+        button = tk.Button(self, text="back", bg='salmon', height=2, width=15, font=BUTTON_FONT,
+                           command=lambda: controller.show_frame("StartPage"))
+        button.place(x=20,y=430)
 
 '''def main():
     root = Tk()
@@ -432,3 +517,6 @@ class RFID(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
+
+
+
