@@ -14,6 +14,7 @@ font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
 Item_type = [["Default", "741G374", "74HC74"], ["Default", "DM7473", "DM7476"], ["Default", "74HC08", "DM7411"],
              ["Default", "74LS10", "74LS13"], ["Default", "DM74LS32", "741G32"]]
+
 #Sorawis code(Arm)
 #variable1 - data in list of D_TYPE = ["Default", "741G374", "74HC74"]
 #variable2 - data in list of JK_TYPE = ["Default", "DM7473", "DM7476"]
@@ -37,7 +38,7 @@ class UserInterface(tk.Tk):
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
         # will be raised above the others
-        container = tk.Frame(*args, borderwidth=20, bg='Dodger Blue2', **kwargs)
+        container = tk.Frame(*args, borderwidth=20, bg='Dodger Blue4', **kwargs)
         container.option_add("*background", "Dodger Blue2")
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1, minsize=300)
