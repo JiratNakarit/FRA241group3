@@ -25,11 +25,21 @@ class Database:
     def ic_admin(self,value_type,value_idofic,value_numofall,datasheet):
         self.sql = "INSERT INTO `ic`(`type`, `idofic`, `numofall` ,`datasheet`) VALUES" + " " + "('%s','%s','%d','%s')" % (str(value_type),str(value_idofic),value_numofall,datasheet)
 
+
     # -----------------------------------------------------------------------------------------------#
     # below is Functions to getting data from database
     def getData(self, table, column):
         sql = "SELECT " + str(column) + " FROM " + str(table)
         return sql
+
+    def get_num(self,value_idofic):
+        Num = []
+        sql = "SELECT `idofic`,`numofall` FROM `ic` WHERE idofic = '%s'" % (str(value_idofic))
+        Database.cursor.execute(sql)
+        data = Database.cursor.fetchone()
+        for i in data:
+            Num.append(i)
+        return Num
 
     def includeColumn(self, data):
         column = []

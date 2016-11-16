@@ -69,9 +69,13 @@ class UserInterface(tk.Tk):
             self.show_frame("PageTwo")
 
     def In(self, num):
-        count[num - 1] += 1
-        quantity[num - 1].set(count[num - 1])
-        print count
+        data = Database.get_num(str(Name_ofIC[num - 1].get()))
+        if count[num - 1] < data[1]:
+            count[num - 1] += 1
+            quantity[num - 1].set(count[num - 1])
+        else:
+            tkMessageBox.showwarning("WARNING!", message=str(Name_ofIC[num - 1].get())+"Out of stock")
+        print count,Name_ofIC[num - 1].get()
 
     def De(self, num):
         count[num - 1] -= 1
@@ -238,14 +242,14 @@ class PageTwo(tk.Frame):
                 product.append(Name_ofIC[i].get())
                 product.append(quantity[i].get())
             print product
-            for i in range(0,len(product)-1):
+            for i in range(0, len(product) - 1):
                 if product[i] != "Default":
-                    if i%2 == 0 :
+                    if i % 2 == 0:
                         value_idofic = product[i]
-                        value_numofall = product[i+1]
-                        Database.id_user(value_idofic,value_numofall)
+                        value_numofall = product[i + 1]
+                        Database.id_user(value_idofic, value_numofall)
                         Database.Commit()
-                        print product[i],product[i+1]
+                        print product[i], product[i + 1]
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
