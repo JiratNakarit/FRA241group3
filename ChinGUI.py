@@ -66,11 +66,6 @@ class UserInterface(tk.Tk):
         if No_Type == 5 and No_Name == 5:
             tkMessageBox.showwarning("WARNING!", "Please select at least one")
         elif correct != 0 and false == 0:
-            self.verify()
-
-    def verify(self):
-        x = tkMessageBox.askquestion("Are you sure", "Do you want to go to verify page?")
-        if x == "yes":
             self.show_frame("PageTwo")
 
     def In(self, num):
@@ -239,13 +234,18 @@ class PageTwo(tk.Frame):
         answer = tkMessageBox.askquestion("Verify", "Please use your KeyCard")
         if answer == "yes":
             product = []
-
             for i in range(self.row):
                 product.append(Name_ofIC[i].get())
                 product.append(quantity[i].get())
             print product
-
-
+            for i in range(0,len(product)-1):
+                if product[i] != "Default":
+                    if i%2 == 0 :
+                        value_idofic = product[i]
+                        value_numofall = product[i+1]
+                        Database.id_user(value_idofic,value_numofall)
+                        Database.Commit()
+                        print product[i],product[i+1]
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -308,12 +308,10 @@ class Admin(tk.Frame):
                 x.append(int(self.Integer.get()))
                 print x
                 value_type = x[0]
-                value_name = x[1]
-                value_numAll = x[2]
-
-                Database.ic(value_type, value_name)
-                Database.Commit()
-                Database.machine_user(value_numAll)
+                value_idofic = x[1]
+                value_numofall = x[2]
+                datasheet = 'Nothing'
+                Database.ic_admin(value_type, value_idofic ,value_numofall,datasheet)
                 Database.Commit()
             else:
                 self.msg.configure(text="Nothing to Add")
