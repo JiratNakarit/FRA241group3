@@ -4,11 +4,7 @@ import MySQLdb
 
 class Database:
     def __init__(self):
-<<<<<<< HEAD
-        self.db = MySQLdb.connect(host="localhost", user="root", passwd="bone2008", db="Kai")
-=======
         self.db = MySQLdb.connect(host="localhost", user="root", passwd="fra241", db="fra241")
->>>>>>> refs/remotes/origin/master
         self.cursor = self.db.cursor()
 
     def Commit(self):
