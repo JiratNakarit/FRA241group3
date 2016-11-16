@@ -103,12 +103,12 @@ class UserInterface(tk.Tk):
             var2.get() != str(0)) or (variable3.get() != str("Default") and var3.get() != str(0)) or (variable4.get() \
             != str("Default") and var4.get() != str(0)) or (variable5.get() != str("Default") and var5.get() != str(0)))\
             and (error == 0):
-            self.verify()
+            self.show_frame("PageTwo")
 
-    def verify(self):
+    '''def verify(self):
         x = tkMessageBox.askquestion("Are you sure","Do you want to go to verify page?")
         if x == "yes":
-            self.show_frame("PageTwo")
+            self.show_frame("PageTwo")'''
 
     def In(self, num):
         count[num - 1] += 1
@@ -335,7 +335,6 @@ class PageTwo(tk.Frame):
         notsure.place(x=20, y=460)
         sure = tk.Button(self, text="sure", bg="OliveDrab2", font=BUTTON_FONT, command=self.Show_Product)
         sure.place(x=700, y=460)
-
     def Show_Product(self):
         answer = tkMessageBox.askquestion("Verify","Please use your keycard")
         if answer == "yes":
