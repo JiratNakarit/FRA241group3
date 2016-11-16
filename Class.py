@@ -4,7 +4,7 @@ import MySQLdb
 
 class Database:
     def __init__(self):
-        self.db = MySQLdb.connect(host="localhost", user="root", passwd="fra241", db="test")
+        self.db = MySQLdb.connect(host="localhost", user="root", passwd="bone2008", db="Kai")
         self.cursor = self.db.cursor()
 
     def Update(self,icid,numall):

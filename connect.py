@@ -2,7 +2,7 @@ import MySQLdb
 
 class Database():
     def __init__(self):
-        self.database = MySQLdb.connect(host="localhost", user="root", passwd="", db="fra241")
+        self.database = MySQLdb.connect(host="localhost", user="root", passwd="bone2008", db="Kai")
         self.cursor = self.database.cursor()
 
     def getData(self, table, column):
@@ -63,6 +63,3 @@ class Database():
             return list_column[column - 1]
         else:
             return list_column
-
-            # name = data_user(db,cursor,2)
-            # stid = data_user(db,cursor,4)
