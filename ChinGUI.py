@@ -93,22 +93,19 @@ class StartPage(tk.Frame):
         label_1startle = tk.Label(self, text="How to use this machine", fg='SystemWindow', font='times 40 underline')
         label_1startle.pack(side="top", fill="x", pady=0)
         label_1st = tk.Label(self,
-                             text="\n\nThe first step of using vending machines, electronic devices allow users to select \n "
+                             text="\n\n\n\nThe first step of using vending machines, electronic devices allow users to select \n "
                                   "the type and number of devices such as the amount you want by pressing the + sign \n "
                                   "to add the device to one of the press - to decrease the device that one. the user \n "
                                   "choose the number is unlimited, but the producers enlisted to choose what's right \n "
-                                  "for the part of saving resources are limited and we have the Data Sheet of each \n "
-                                  "componentin the form of. QR CODE you can check that the device is made, and some \n "
-                                  "are unique,however.from this machine \n\n"
+                                  "for the part of saving resources are limited.\n\n\n"
                                   "The second step when the user selects completed successfully,the user presses the OK \n "
-                                  "button at the lower right corner one time, the system will display a list of devices \n "
-                                  "and users have ordered earlier if the users. the type and number of devices you have \n "
-                                  "to go on our website and will automatically supply the user has been ordered out of \n "
-                                  "the area in front of the machine. And in addition, the manufacturer has a zipper storage \n "
-                                  "bag to prevent damage of electronic devices as well. Welcome to the user when the user \n "
-                                  "does not have to be finished off.\n\n"
-                                  "Finally If the user wants to check your history. You can also check that each device \n "
-                                  "inside the electronics remaining amount.\n\n\n\n"
+                                  "button at the lower right corner one time, the system will display a list of order's devices. \n "
+                                  "Then recheck your devices if you already check ,So press the sure button and then scan your \n"
+                                  "KeyCard for receive your order. And the system will automatically save your history into server.\n\n\n"
+                                  "Finally If the user wants to check your history,you can check it in system website.\n"
+                                  "And you can also check that each device inside the electronics remaining amount.\n\n"
+                                  "-----------------------------------------------------------------------------------------------\n"
+                                  "The system website : http://hello world.com\n\n\n"
                              , fg='SystemWindow', font=EXPLAND_FONT)
         label_1st.pack(side="top", fill="x", padx=100)
         button = tk.Button(self, text="I'm accept", bg="OliveDrab2", height=2, font=BUTTON_FONT,
@@ -129,19 +126,19 @@ class PageOne(tk.Frame):
 
         self.Type_Ic = dataIn.Type_Ic
         self.Name_Ic = dataIn.Name_Ic
-        self.height = len(dataIn.Type_Ic)
+        self.row = len(dataIn.Type_Ic)
         self.Name_ofIC = []
         self.quantity = []
         self.count = 0
         self.y = 100
 
-        for i in range(self.height):
+        for i in range(self.row):
             var = StringVar()
             var.set(self.Name_Ic[self.count][0])
             self.Name_ofIC.append(var)
             self.count += 1
 
-        for i in range(self.height):
+        for i in range(self.row):
             var = StringVar()
             var.set(0)
             self.quantity.append(var)
@@ -159,7 +156,7 @@ class PageOne(tk.Frame):
         elect_type.place(x=5, y=55)
 
         # create ic widget
-        for i in range(self.height):
+        for i in range(self.row):
             ic_type1 = tk.Label(self, text=self.Type_Ic[i], fg='SystemWindow', font=IC_FONT)
             ic_type1.place(x=25, y=self.y)
 
@@ -204,7 +201,7 @@ class PageOne(tk.Frame):
                             command=lambda: controller.show_frame("StartPage"))
         button1.place(x=20, y=460)
         button2 = tk.Button(self, text="Next", bg="OliveDrab2", font=BUTTON_FONT,
-                            command=lambda: controller.CheckUser(self.height))
+                            command=lambda: controller.CheckUser(self.row))
         button2.place(x=700, y=460)
 
 
@@ -224,11 +221,11 @@ class PageTwo(tk.Frame):
         # create ic widget
         for i in range(self.row):
             name = Label(self, textvariable=Name_ofIC[i], font=BUTTON_FONT, bg='pale green', relief=RAISED)
-            name.place(height=30, width=70, x=85, y=self.y)
-            number = Label(self, textvariable=quantity[i], font=BUTTON_FONT, bg='lavender', relief=RAISED)
-            number.place(height=30, width=70, x=355, y=self.y)
+            name.place(height=30, width=120, x=85, y=self.y)
+            number = Label(self, textvariable=quantity[i], font=BUTTON_FONT, bg='lavender')
+            number.place(height=30, width=50, x=355, y=self.y)
             unit = Label(self, text="piece", font=BUTTON_FONT, bg='lavender', relief=RAISED)
-            unit.place(height=30, width=70, x=625, y=self.y)
+            unit.place(height=30, width=55, x=500, y=self.y)
             self.y += 70
 
         # create changePage widget
@@ -312,11 +309,11 @@ class Admin(tk.Frame):
                 print x
                 value_type = x[0]
                 value_name = x[1]
-                value_numall = x[2]
+                value_numAll = x[2]
 
                 Database.ic(value_type, value_name)
                 Database.Commit()
-                Database.machine_user(value_numall)
+                Database.machine_user(value_numAll)
                 Database.Commit()
             else:
                 self.msg.configure(text="Nothing to Add")
