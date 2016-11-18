@@ -1,13 +1,12 @@
 import Tkinter as tk
 import Tkinter
 import tkMessageBox
-<<<<<<< HEAD
 from Class import *
-=======
+
 from Tkinter import *
 
 from ChinReceiveDataFromIcTable import *
->>>>>>> refs/remotes/origin/master
+
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
