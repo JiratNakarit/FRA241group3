@@ -14,6 +14,7 @@ font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
 
 
+
 class UserInterface(tk.Tk):
     def __init__(self, *args, **kwargs):
         # tkinter method
@@ -69,13 +70,16 @@ class UserInterface(tk.Tk):
             self.show_frame("PageTwo")
 
     def In(self, num):
-        data = Database.get_num(str(Name_ofIC[num - 1].get()))  # data[0] = NameofIC data[1] = NumofIc
-        if count[num - 1] < data[1]:
-            count[num - 1] += 1
-            quantity[num - 1].set(count[num - 1])
+        if str(Name_ofIC[num - 1].get()) != "Default":
+            data = Database.get_num(str(Name_ofIC[num - 1].get()))  # data[0] = NameofIC data[1] = NumofIc
+            if count[num - 1] < data[1]:
+                count[num - 1] += 1
+                quantity[num - 1].set(count[num - 1])
+            else:
+                tkMessageBox.showwarning("WARNING!", message=str(Name_ofIC[num - 1].get()) + "Out of stock")
+            print count, Name_ofIC[num - 1].get()
         else:
-            tkMessageBox.showwarning("WARNING!", message=str(Name_ofIC[num - 1].get())+"Out of stock")
-        print count,Name_ofIC[num - 1].get()
+            tkMessageBox.showwarning("WARNING!", message="Please select IC")
 
     def De(self, num):
         count[num - 1] -= 1
