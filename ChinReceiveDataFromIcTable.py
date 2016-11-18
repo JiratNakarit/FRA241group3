@@ -28,5 +28,5 @@ class item:
 
 
 dataIn = item()
-# print dataIn.Type_Ic
-# print dataIn.Name_Ic
+print dataIn.Type_Ic
+print dataIn.Name_Ic
