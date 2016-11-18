@@ -4,7 +4,7 @@ import MySQLdb
 
 class Database:
     def __init__(self):
-        self.db = MySQLdb.connect(host="localhost", user="root", passwd="fra241", db="fra241")
+        self.db = MySQLdb.connect(host="localhost", user="root", passwd="bone2008", db="fra241") # Default password is fra241
         self.cursor = self.db.cursor()
 
     def Commit(self):
