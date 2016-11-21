@@ -239,6 +239,8 @@ class PageTwo(tk.Frame):
         sure.place(x=700, y=460)
 
     def Show_Product(self):
+        self.list_ID = []
+        self.list_NUM = []
         answer = tkMessageBox.askquestion("Verify", "Please use your KeyCard")
         if answer == "yes":
             product = []
@@ -250,12 +252,20 @@ class PageTwo(tk.Frame):
                 if product[i] != "Default":
                     if i % 2 == 0:
                         value_idofic = product[i]
+                        self.list_ID.append(product[i])
                         value_numofall = product[i + 1]
+                        self.list_NUM.append(int(product[i+1]))
                         Database.id_user(value_idofic, value_numofall)
                         Database.Commit()
+<<<<<<< HEAD
                         Database.insert_history(58340500099,value_idofic,value_numofall)
                         Database.Commit()
                         print product[i], product[i + 1]
+=======
+
+            print self.list_ID
+            print self.list_NUM
+>>>>>>> master
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -340,6 +350,11 @@ class RFID(tk.Frame):
         button = tk.Button(self, text="back", bg='salmon', height=2, width=15, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("StartPage"))
         button.place(x=20, y=430)
+
+'''class Motor(PageTwo):
+    def turn(self):'''
+
+
 
 
 '''def main():
