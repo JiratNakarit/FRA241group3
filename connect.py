@@ -2,7 +2,7 @@ import MySQLdb
 
 class Database():
     def __init__(self):
-        self.database = MySQLdb.connect(host="localhost", user="root", passwd="bone2008", db="Kai")
+        self.database = MySQLdb.connect(host="localhost", user="root", passwd="", db="fra241")
         self.cursor = self.database.cursor()
 
     def getData(self, table, column):

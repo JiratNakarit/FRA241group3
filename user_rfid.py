@@ -3,11 +3,18 @@ from Class import *
 
 class Read_RFID:
     def __init__(self):
-        self.test_uid = [231,39,234,26]
+        ## for test
+        self.test_uid = [128,15,141,59]
 
-    def get_uid(self):
+    def get_uid(self,lst_uid = [0,0,0,0,0]):
         # return uid in RFID
         # wait for code to get uid
+        ##################
+
+        ## Input yor code here
+        ##
+
+        ###################
         hex_uid = ''
         # changes uid to hex number but on string
         for i in range(len(self.test_uid)):
