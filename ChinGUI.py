@@ -257,9 +257,15 @@ class PageTwo(tk.Frame):
                         self.list_NUM.append(int(product[i+1]))
                         Database.id_user(value_idofic, value_numofall)
                         Database.Commit()
+<<<<<<< HEAD
+                        Database.insert_history(58340500099,value_idofic,value_numofall)
+                        Database.Commit()
+                        print product[i], product[i + 1]
+=======
 
             print self.list_ID
             print self.list_NUM
+>>>>>>> master
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)

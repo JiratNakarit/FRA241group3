@@ -1,9 +1,12 @@
 import Tkinter as tk
 import Tkinter
 import tkMessageBox
+from Class import *
+
 from Tkinter import *
 
 from ChinReceiveDataFromIcTable import *
+
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
 EXPLAND_FONT = ("Helvetica", 10, "bold")
@@ -344,6 +347,3 @@ class RFID(tk.Frame):
 if __name__ == "__main__":
     app = UserInterface()
     app.mainloop()
-
-
-

@@ -1,10 +1,17 @@
 #!/usr/bin/python
 import MySQLdb
+import time
+
 
 
 class Database:
     def __init__(self):
+<<<<<<< HEAD
+
+        self.db = MySQLdb.connect(host="localhost", user="root", passwd="", db="fra241") # Default password is fra241
+=======
         self.db = MySQLdb.connect(host="localhost", user="root", passwd="fra241", db="fra241")
+>>>>>>> master
         self.cursor = self.db.cursor()
 
     def Commit(self):
@@ -24,6 +31,10 @@ class Database:
 
     def ic_admin(self,value_type,value_idofic,value_numofall,datasheet):
         self.sql = "INSERT INTO `ic`(`type`, `idofic`, `numofall` ,`datasheet`) VALUES" + " " + "('%s','%s','%d','%s')" % (str(value_type),str(value_idofic),value_numofall,datasheet)
+
+    def insert_history(self,stid,numofic,num):
+        Now = time.strftime('%Y-%m-%d %H:%M:%S')
+        self.sql = "INSERT INTO `history`(`stid`, `idofic` ,`num`,`datetime`) VALUES" + " " + "('%d','%s','%d','%s')" % (stid,numofic,int(num),Now)
 
 
     # -----------------------------------------------------------------------------------------------#

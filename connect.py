@@ -63,6 +63,3 @@ class Database():
             return list_column[column - 1]
         else:
             return list_column
-
-            # name = data_user(db,cursor,2)
-            # stid = data_user(db,cursor,4)
