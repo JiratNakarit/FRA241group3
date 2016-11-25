@@ -7,7 +7,7 @@ import time
 class Database:
     def __init__(self):
 
-        self.db = MySQLdb.connect(host="localhost", user="root", passwd="fra241", db="fra241")
+        self.db = MySQLdb.connect(host="localhost", user="root", passwd="bone2008", db="fra241")
         self.cursor = self.db.cursor()
 
     def Commit(self):
@@ -47,6 +47,15 @@ class Database:
         for i in data:
             Num.append(i)
         return Num
+
+    def get_stid(self,rfid_value):
+        stid = []
+        sql = "SELECT `stid` FROM `user` WHERE cardid = '%s'" % (str(rfid_value))
+        Database.cursor.execute(sql)
+        data = Database.cursor.fetchone()
+        for i in data:
+            stid.append(i)
+        return stid
 
     def includeColumn(self, data):
         column = []

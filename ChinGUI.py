@@ -115,7 +115,7 @@ class StartPage(tk.Frame):
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
         admin = tk.Button(self, text="ADMIN", height=2, bg="salmon", font=BUTTON_FONT,
-                          command=lambda: controller.show_frame("RFID"))
+                          command=lambda: controller.show_frame("Admin"))
         admin.place(x=5, y=10)
 
 

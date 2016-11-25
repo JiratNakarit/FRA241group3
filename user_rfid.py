@@ -44,3 +44,19 @@ class Read_RFID:
             return True
         else:
             return False
+
+    def get_stid(self,uid):
+        lst = Database.data_user(Database.cursor,1)
+        lst2 = Database.data_user(Database.cursor,1)
+        lst = list(lst)
+        lst2 = list(lst2)
+        for i in range(len(lst)):
+            lst[i] = int(lst[i])
+
+        for i in range(len(lst)):
+            lst[i] = format(lst[i],'02x')
+
+        for i in range(len(lst)):
+            if uid == lst[i]:
+                post = i
+        return int(lst2[post])
