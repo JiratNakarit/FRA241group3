@@ -1,5 +1,9 @@
 <?php require_once('connect2db/connect2db.php'); ?>
 <?php
+if (!isset($_SESSION)) {
+  session_start();
+}
+
 $maxRows_MA = 10;
 $pageNum_MA = 0;
 if (isset($_GET['pageNum_MA'])) {
@@ -8,7 +12,7 @@ if (isset($_GET['pageNum_MA'])) {
 $startRow_MA = $pageNum_MA * $maxRows_MA;
 
 mysql_select_db($database_241, $FRA);
-$query_MA = "SELECT * FROM ic";
+$query_MA = "SELECT * FROM history WHERE stid LIKE '%".$_SESSION['MM_stid']."%'";
 $query_limit_MA = sprintf("%s LIMIT %d, %d", $query_MA, $startRow_MA, $maxRows_MA);
 $MA = mysql_query($query_limit_MA, $FRA) or die(mysql_error());
 $row_MA = mysql_fetch_assoc($MA);
@@ -152,17 +156,17 @@ $(function() {
 
 <table width = "1000" border = "0">
 	<tr>
-		<th width="30%" align="center"><strong>ชนิด IC</strong></th>
+		<th width="30%" align="center"><strong>รหัสนักศึกษา</strong></th>
 		<th width="30%" align="center"><strong>รหัส IC</strong></th>
-		<th width="20%" align="center"><strong>จำนวนที่เหลือ</strong></th>
-		<th width="20%" align="center"><strong>Datasheet</strong></th>
+		<th width="20%" align="center"><strong>จำนวน</strong></th>
+		<th width="20%" align="center"><strong>วันที่/เวลา</strong></th>
 	</tr>
 <?php do{?>
 	<tr>
-		<td align="center"><?php echo $row_MA['type']; ?></td>
-		<td align="center"><?php echo $row_MA['idofic']; ?></td>
-		<td align="center"><?php echo $row_MA['numofall']; ?></td>
-		<td align="center"><a href = "<?php echo $row_MA['datasheet']; ?>">Link</a></td>
+		<td align="center"><?php echo $row_MA['stid']; ?></td>
+		<td align="center"><?php echo $row_MA['icid']; ?></td>
+		<td align="center"><?php echo $row_MA['num']; ?></td>
+		<td align="center"><?php echo $row_MA['datasheet']; ?></td>
 	</tr>
 <?php } while($row_MA = mysql_fetch_assoc($MA));?>
 </table>
