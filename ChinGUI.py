@@ -2,6 +2,16 @@ import Tkinter as tk
 import Tkinter
 import tkMessageBox
 from Tkinter import *
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(29, GPIO.OUT)            #LM293D
+GPIO.setup(31, GPIO.OUT)
+
+GPIO.setup(33, GPIO.OUT)            #SN74HC166
+GPIO.setup(35, GPIO.OUT)
+
+GPIO.setup(36, GPIO.OUT)            #SN74HC100N
+GPIO.setup(38, GPIO.OUT)
 
 from ChinReceiveDataFromIcTable import *
 
@@ -77,7 +87,7 @@ class UserInterface(tk.Tk):
                 quantity[num - 1].set(count[num - 1])
             else:
                 tkMessageBox.showwarning("WARNING!", message=str(Name_ofIC[num - 1].get()) + "Out of stock")
-            print count, Name_ofIC[num - 1].get()
+            #print count, Name_ofIC[num - 1].get()
         else:
             tkMessageBox.showwarning("WARNING!", message="Please select IC")
 
@@ -86,7 +96,7 @@ class UserInterface(tk.Tk):
         if count[num - 1] <= 0:
             count[num - 1] = 0
         quantity[num - 1].set(count[num - 1])
-        print count
+        #print count
 
 
 class StartPage(tk.Frame):
@@ -243,11 +253,12 @@ class PageTwo(tk.Frame):
         self.list_NUM = []
         answer = tkMessageBox.askquestion("Verify", "Please use your KeyCard")
         if answer == "yes":
+
             product = []
             for i in range(self.row):
                 product.append(Name_ofIC[i].get())
                 product.append(quantity[i].get())
-            print product
+            #print product
             for i in range(0, len(product) - 1):
                 if product[i] != "Default":
                     if i % 2 == 0:
@@ -263,8 +274,9 @@ class PageTwo(tk.Frame):
                         # print product[i], product[i + 1]
                         #
 
-            print self.list_ID
-            print self.list_NUM
+            #print self.list_ID
+            #print self.list_NUM
+            Motor(self.list_ID,self.list_NUM)
 
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
@@ -351,8 +363,37 @@ class RFID(tk.Frame):
                            command=lambda: controller.show_frame("StartPage"))
         button.place(x=20, y=430)
 
-'''class Motor(PageTwo):
-    def turn(self):'''
+
+
+class Motor():
+    def __init__(self,list_ID,list_NUM):
+        print list_ID
+        print list_NUM
+        for i in range(list_ID):
+            if list_ID[i] == 'LM293P':
+                t = x
+                A_num = 8
+                for j in range(list_NUM[i]):
+                    tA = (9-A_num)*t
+                    A1 = GPIO.PWM(29, 0.5)
+                    A2 = GPIO.PWM(31, 0.5)
+                    A1.start(10)
+                    time.sleep(tA)
+                    A2.start(10)
+                    time.sleep(tA)
+                    A_num -= 1
+            elif list_ID[i] == 'SN74HC166':
+                pass
+
+            elif list_ID[i] == 'SN74HC100N':
+                pass
+
+
+
+
+
+
+
 
 
 
