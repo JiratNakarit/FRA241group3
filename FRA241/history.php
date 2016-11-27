@@ -1,19 +1,72 @@
 <?php require_once('connect2db/connect2db.php'); ?>
 <?php
-$maxRows_MA = 10;
-$pageNum_MA = 0;
-if (isset($_GET['pageNum_MA'])) {
-  $pageNum_MA = $_GET['pageNum_MA'];
+// *** Validate request to login to this site.
+if (!isset($_SESSION)) {
+  session_start();
 }
-$startRow_MA = $pageNum_MA * $maxRows_MA;
 
-mysql_select_db($database_241, $FRA);
-$query_MA = "SELECT * FROM ic";
-$query_limit_MA = sprintf("%s LIMIT %d, %d", $query_MA, $startRow_MA, $maxRows_MA);
-$MA = mysql_query($query_limit_MA, $FRA) or die(mysql_error());
-$row_MA = mysql_fetch_assoc($MA);
+if (!function_exists("GetSQLValueString")) {
+	function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") {
+		if (PHP_VERSION < 6) {
+			$theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+		}
+		$theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+		switch ($theType) {
+			case "text":
+				$theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+				break;    
+			case "long":
+			case "int":
+				$theValue = ($theValue != "") ? intval($theValue) : "NULL";
+			break;
+			case "double":
+				$theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+				break;
+			case "date":
+				$theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+				break;
+			case "defined":
+				$theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+				break;
+		}
+		return $theValue;
+	}
+}
 
+$FormAction = $_SERVER['PHP_SELF'];
+if (isset($_GET['accesscheck'])) {
+  $_SESSION['PrevUrl'] = $_GET['accesscheck'];
+}
+
+if (isset($_POST['stid'])) {
+  $studentID=$_POST['stid'];
+  $MM_redirectLoginSuccess = "showhis.php";
+  $MM_redirectLoginFailed = "index.php";
+  $MM_redirecttoReferrer = false;
+  mysql_select_db($database_241, $FRA);
+  
+  $search_query=sprintf("SELECT stid FROM history WHERE stid=%s",
+    GetSQLValueString($studentID, "text")); 
+   
+  $search_RS = mysql_query($search_query, $FRA) or die(mysql_error());
+  $FoundUser = mysql_num_rows($search_RS);
+  if ($FoundUser) {
+	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
+    //declare two session variables and assign them
+    $_SESSION['MM_stid'] = $studentID;	      
+	
+	if (isset($_SESSION['PrevUrl']) && false) {
+      $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	
+    }
+	
+    header("Location: " . $MM_redirectLoginSuccess );
+  }
+  else {
+    header("Location: ". $MM_redirectLoginFailed );
+  }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -150,22 +203,19 @@ $(function() {
     <hr/>
 <p>&nbsp;</p>
 
-<table width = "1000" border = "0">
-	<tr>
-		<th width="30%" align="center"><strong>ชนิด IC</strong></th>
-		<th width="30%" align="center"><strong>รหัส IC</strong></th>
-		<th width="20%" align="center"><strong>จำนวนที่เหลือ</strong></th>
-		<th width="20%" align="center"><strong>Datasheet</strong></th>
-	</tr>
-<?php do{?>
-	<tr>
-		<td align="center"><?php echo $row_MA['type']; ?></td>
-		<td align="center"><?php echo $row_MA['idofic']; ?></td>
-		<td align="center"><?php echo $row_MA['numofall']; ?></td>
-		<td align="center"><a href = "<?php echo $row_MA['datasheet']; ?>">Link</a></td>
-	</tr>
-<?php } while($row_MA = mysql_fetch_assoc($MA));?>
-</table>
+<form name="searchbox" method="POST" ACTION="<?php echo $FormAction; ?>">
+	<table width="1000" border="0">
+		<tr>
+			<th align="center">กรุณาระบุรหัสนักศึกษา</th>
+		</tr>
+		<tr>
+			<td><input name="stid" type="text" id="stid"></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="ค้นหา"></td>
+		</tr>
+	</table>
+</form>
 </center>
 <br>
 
