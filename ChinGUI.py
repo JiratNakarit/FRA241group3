@@ -334,17 +334,21 @@ class Admin(tk.Frame):
             if self.Integer.get().isdigit():
                 self.msg.configure(text=("Added:", self.type.get(), "__", self.name.get(), "__", self.Integer.get()
                                          , "piece"))
-                x = []
-                x.append(self.type.get())
-                x.append(self.name.get())
-                x.append(int(self.Integer.get()))
-                print x
-                value_type = x[0]
-                value_idofic = x[1]
-                value_numofall = x[2]
-                datasheet = 'Nothing'
-                Database.ic_admin(value_type, value_idofic ,value_numofall,datasheet)
-                Database.Commit()
+                if self.name.get() in Database.data_ic(Database.cursor, 3):
+                    Database.num_admin(self.name.get(), self.Integer.get())
+                    Database.Commit()
+                else:
+                    x = []
+                    x.append(self.type.get())
+                    x.append(self.name.get())
+                    x.append(int(self.Integer.get()))
+                    print x
+                    value_type = x[0]
+                    value_idofic = x[1]
+                    value_numofall = x[2]
+                    datasheet = 'Nothing'
+                    Database.ic_admin(value_type, value_idofic ,value_numofall,datasheet)
+                    Database.Commit()
             else:
                 self.msg.configure(text="Nothing to Add")
 

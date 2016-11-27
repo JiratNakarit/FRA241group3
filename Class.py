@@ -25,6 +25,9 @@ class Database:
     def id_user(self,value_idofic,value_numofall):
         self.sql = "UPDATE ic SET numofall = numofall -" + " " + str(value_numofall) + " " + "WHERE idofic = '%s'" % (str(value_idofic))
 
+    def num_admin(self,value_idofic,value_numofall):
+        self.sql = "UPDATE ic SET numofall = numofall +" + " " + str(value_numofall) + " " + "WHERE idofic = '%s'" % (str(value_idofic))
+
     def ic_admin(self,value_type,value_idofic,value_numofall,datasheet):
         self.sql = "INSERT INTO `ic`(`type`, `idofic`, `numofall` ,`datasheet`) VALUES" + " " + "('%s','%s','%d','%s')" % (str(value_type),str(value_idofic),value_numofall,datasheet)
 
