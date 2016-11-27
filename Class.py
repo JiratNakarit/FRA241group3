@@ -55,7 +55,7 @@ class Database:
         data = Database.cursor.fetchone()
         for i in data:
             stid.append(i)
-        return stid
+        return int(stid[0])
 
     def includeColumn(self, data):
         column = []

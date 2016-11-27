@@ -2,6 +2,7 @@ import Tkinter as tk
 import Tkinter
 import tkMessageBox
 from Tkinter import *
+from user_rfid import *
 
 from ChinReceiveDataFromIcTable import *
 
@@ -13,7 +14,7 @@ TYPE_FONT = ("Helvetica", 15, "bold")
 font1 = ('Verdana', '10', 'bold')
 IC_FONT = BUTTON_FONT
 
-
+rfid = Read_RFID()
 
 class UserInterface(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -24,6 +25,7 @@ class UserInterface(tk.Tk):
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1, minsize=300)
         container.grid_columnconfigure(0, weight=1, minsize=500)
+        self.row = len(dataIn.Type_Ic)
 
         self.frames = {}
         for F in (StartPage, PageOne, PageTwo, Admin, RFID):
@@ -87,6 +89,37 @@ class UserInterface(tk.Tk):
             count[num - 1] = 0
         quantity[num - 1].set(count[num - 1])
         print count
+
+    def Show_Product(self):
+        self.list_ID = []
+        self.list_NUM = []
+        answer = tkMessageBox.showinfo("Verify", "Please use your KeyCard")
+        uid = rfid.get_uid()
+
+        if rfid.check_on_database(uid):
+            uid_fordb = rfid.get_stid(uid)
+            stid = Database.get_stid(uid_fordb)
+
+            product = []
+            for i in range(self.row):
+                product.append(Name_ofIC[i].get())
+                product.append(quantity[i].get())
+            print product
+            for i in range(0, len(product) - 1):
+                if product[i] != "Default":
+                    if i % 2 == 0:
+                        value_idofic = product[i]
+                        self.list_ID.append(product[i])
+                        value_numofall = product[i + 1]
+                        self.list_NUM.append(int(product[i+1]))
+                        Database.id_user(value_idofic, value_numofall)
+                        Database.Commit()
+                        Database.insert_history(stid,value_idofic,value_numofall)
+                        Database.Commit()
+
+            print self.list_ID
+            print self.list_NUM
+            self.show_frame("StartPage")
 
 
 class StartPage(tk.Frame):
@@ -235,14 +268,19 @@ class PageTwo(tk.Frame):
         Notsure = tk.Button(self, text="Not sure", bg="salmon", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("PageOne"))
         Notsure.place(x=20, y=460)
-        sure = tk.Button(self, text="sure", bg="OliveDrab2", font=BUTTON_FONT, command=self.Show_Product)
+        sure = tk.Button(self, text="sure", bg="OliveDrab2", font=BUTTON_FONT, command=lambda:controller.Show_Product())
         sure.place(x=700, y=460)
 
-    def Show_Product(self):
+    '''def Show_Product(self):
         self.list_ID = []
         self.list_NUM = []
-        answer = tkMessageBox.askquestion("Verify", "Please use your KeyCard")
-        if answer == "yes":
+        answer = tkMessageBox.showinfo("Verify", "Please use your KeyCard")
+        uid = rfid.get_uid()
+
+        if rfid.check_on_database(uid):
+            uid_fordb = rfid.get_stid(uid)
+            stid = Database.get_stid(uid_fordb)
+
             product = []
             for i in range(self.row):
                 product.append(Name_ofIC[i].get())
@@ -257,14 +295,12 @@ class PageTwo(tk.Frame):
                         self.list_NUM.append(int(product[i+1]))
                         Database.id_user(value_idofic, value_numofall)
                         Database.Commit()
-
-                        # Database.insert_history(58340500099,value_idofic,value_numofall)
-                        # Database.Commit()
-                        # print product[i], product[i + 1]
-                        #
+                        Database.insert_history(stid,value_idofic,value_numofall)
+                        Database.Commit()
 
             print self.list_ID
-            print self.list_NUM
+            print self.list_NUM'''
+
 
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
