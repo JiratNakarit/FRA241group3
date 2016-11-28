@@ -2,7 +2,7 @@ import Tkinter as tk
 import Tkinter
 import tkMessageBox
 from Tkinter import *
-import RPi.GPIO as GPIO
+'''import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(29, GPIO.OUT)            #LM293D
 GPIO.setup(31, GPIO.OUT)
@@ -11,7 +11,13 @@ GPIO.setup(33, GPIO.OUT)            #SN74HC166
 GPIO.setup(35, GPIO.OUT)
 
 GPIO.setup(36, GPIO.OUT)            #SN74HC100N
-GPIO.setup(38, GPIO.OUT)
+GPIO.setup(38, GPIO.OUT)'''
+A = 5
+B = 5
+C = 5
+I = 0
+J = 0
+K = 0
 
 from ChinReceiveDataFromIcTable import *
 
@@ -373,24 +379,103 @@ class Motor():
     def __init__(self,list_ID,list_NUM):
         print list_ID
         print list_NUM
-        for i in range(list_ID):
+        print len(list_ID)
+        global A,I,J,K
+        global B
+        global C
+
+        for i in range(len(list_ID)):
+            print list_ID[i]
             if list_ID[i] == 'LM293P':
-                t = x
-                A_num = 8
-                for j in range(list_NUM[i]):
-                    tA = (9-A_num)*t
-                    A1 = GPIO.PWM(29, 0.5)
-                    A2 = GPIO.PWM(31, 0.5)
-                    A1.start(10)
-                    time.sleep(tA)
-                    A2.start(10)
-                    time.sleep(tA)
-                    A_num -= 1
+                print A
+                print list_ID[i]
+                print list_NUM[i]
+                if list_NUM[i] >= 5:
+                    list_NUM[i] = 5
+                    t1 = (0.31 * list_NUM[i])
+                    print t1
+                elif list_NUM[i] > A:
+                    list_NUM[i] = A
+                    t1 = (0.31 * list_NUM[i])
+                    print t1
+                elif list_NUM[i] < A:
+                    t1 = (0.31 * list_NUM[i])
+                    print t1
+                GPIO.output(31,GPIO.LOW)
+                GPIO.output(29, GPIO.HIGH)
+                time.sleep(t1)
+                GPIO.output(31, GPIO.LOW)
+                GPIO.output(29, GPIO.LOW)
+                A = A - list_NUM[i]
+                print ('Available A: ', A)
+                if A <= 0:
+                    t1 = (0.31 * 5)
+                    GPIO.output(31, GPIO.HIGH)
+                    GPIO.output(29, GPIO.LOW)
+                    time.sleep(t1)
+                    GPIO.output(31, GPIO.LOW)
+                    GPIO.output(29, GPIO.LOW)
+
             elif list_ID[i] == 'SN74HC166':
-                pass
+                print B
+                print list_ID[i]
+                print list_NUM[i]
+                if list_NUM[i] >= 5:
+                    list_NUM[i] = 5
+                    t2 = (0.41 * list_NUM[i])
+                    print t2
+                elif list_NUM[i] > B:
+                    list_NUM[i] = B
+                    t2 = (0.41 * list_NUM[i])
+                    print t2
+                elif list_NUM[i] < B:
+                    t2 = (0.41 * list_NUM[i])
+                    print t2
+                GPIO.output(35, GPIO.LOW)
+                GPIO.output(33, GPIO.HIGH)
+                time.sleep(t2)
+                GPIO.output(35, GPIO.LOW)
+                GPIO.output(33, GPIO.LOW)
+                B = B - list_NUM[i]
+                print ('Available B: ', B)
+                if B <= 0:
+                    t1 = (0.36 * 5)
+                    GPIO.output(35, GPIO.HIGH)
+                    GPIO.output(33, GPIO.LOW)
+                    time.sleep(t2)
+                    GPIO.output(35, GPIO.LOW)
+                    GPIO.output(33, GPIO.LOW)
 
             elif list_ID[i] == 'SN74HC100N':
-                pass
+                print C
+                print list_ID[i]
+                print list_NUM[i]
+                if list_NUM[i] >= 5:
+                    list_NUM[i] = 5
+                    t3 = (0.31 * list_NUM[i])
+                    print t3
+                elif list_NUM[i] > C:
+                    list_NUM[i] = C
+                    t3 = (0.31 * list_NUM[i])
+                    print t3
+                elif list_NUM[i] < C:
+                    t3 = (0.31 * list_NUM[i])
+                    print t3
+                GPIO.output(38, GPIO.LOW)
+                GPIO.output(36, GPIO.HIGH)
+                time.sleep(t3)
+                GPIO.output(38, GPIO.LOW)
+                GPIO.output(36, GPIO.LOW)
+                C = C - list_NUM[i]
+                print ('Available C: ', C)
+                if C <= 0:
+                    t1 = (0.305 * 5)
+                    GPIO.output(38, GPIO.HIGH)
+                    GPIO.output(36, GPIO.LOW)
+                    time.sleep(t1)
+                    GPIO.output(38, GPIO.LOW)
+                    GPIO.output(36, GPIO.LOW)
+
 
 
 
