@@ -457,6 +457,7 @@ class numPad(simpledialog.Dialog):
                 print self.parent.edited
 
     def ok(self):
+        self.parent.count = 0
         self.top.destroy()
         self.top.master.focus()
 
