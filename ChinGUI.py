@@ -16,7 +16,7 @@ GPIO.setup(38, GPIO.OUT)
 from ChinReceiveDataFromIcTable import *
 
 TITLE1_FONT = ("Helvetica", 40, "bold")
-EXPLAND_FONT = ("Helvetica", 10, "bold")
+EXPLAND_FONT = ("Helvetica", 14, "bold")
 TITLE2_FONT = ("Helvetica", 25, "bold")
 BUTTON_FONT = ("Helvetica", 12, "bold")
 TYPE_FONT = ("Helvetica", 15, "bold")
@@ -34,7 +34,7 @@ class UserInterface(tk.Tk):
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1, minsize=300)
         container.grid_columnconfigure(0, weight=1, minsize=500)
-
+        self.row = len(dataIn.Type_Ic)
         self.frames = {}
         for F in (StartPage, PageOne, PageTwo, Admin, RFID):
             page_name = F.__name__
@@ -98,6 +98,37 @@ class UserInterface(tk.Tk):
         quantity[num - 1].set(count[num - 1])
         #print count
 
+    def Show_Product(self):
+        self.list_ID = []
+        self.list_NUM = []
+        answer = tkMessageBox.askquestion("Verify", "Please use your KeyCard")
+        if answer == "yes":
+
+            product = []
+            for i in range(self.row):
+                product.append(Name_ofIC[i].get())
+                product.append(quantity[i].get())
+            #print product
+            for i in range(0, len(product) - 1):
+                if product[i] != "Default":
+                    if i % 2 == 0:
+                        value_idofic = product[i]
+                        self.list_ID.append(product[i])
+                        value_numofall = product[i + 1]
+                        self.list_NUM.append(int(product[i+1]))
+                        Database.id_user(value_idofic, value_numofall)
+                        Database.Commit()
+
+                        # Database.insert_history(58340500099,value_idofic,value_numofall)
+                        # Database.Commit()
+                        # print product[i], product[i + 1]
+                        #
+
+            #print self.list_ID
+            #print self.list_NUM
+            Motor(self.list_ID,self.list_NUM)
+            self.show_frame("StartPage")
+
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -105,22 +136,11 @@ class StartPage(tk.Frame):
         self.controller = controller
         label_1startle = tk.Label(self, text="How to use this machine", fg='SystemWindow', font='times 40 underline')
         label_1startle.pack(side="top", fill="x", pady=0)
-        label_1st = tk.Label(self,
-                             text="\n\n\n\nThe first step of using vending machines, electronic devices allow users to select \n "
-                                  "the type and number of devices such as the amount you want by pressing the + sign \n "
-                                  "to add the device to one of the press - to decrease the device that one. the user \n "
-                                  "choose the number is unlimited, but the producers enlisted to choose what's right \n "
-                                  "for the part of saving resources are limited.\n\n\n"
-                                  "The second step when the user selects completed successfully,the user presses the OK \n "
-                                  "button at the lower right corner one time, the system will display a list of order's devices. \n "
-                                  "Then recheck your devices if you already check ,So press the sure button and then scan your \n"
-                                  "KeyCard for receive your order. And the system will automatically save your history into server.\n\n\n"
-                                  "Finally If the user wants to check your history,you can check it in system website.\n"
-                                  "And you can also check that each device inside the electronics remaining amount.\n\n"
-                                  "-----------------------------------------------------------------------------------------------\n"
-                                  "The system website : http://hello world.com\n\n\n"
-                             , fg='SystemWindow', font=EXPLAND_FONT)
-        label_1st.pack(side="top", fill="x", padx=100)
+        label_1st = tk.Label(self,text="\n1.Press "+"I'm accept\n\n"+"2.Finish your order then press "+"Next\n\n"+
+                            "3.Check your order, Are they correctly?\n\n"+"4.If they are correct press sure if not "
+                            "press not sure\n\n"+"5.Use your student card\n\n"+"6.Wait for your IC and have fun with it\n\n"
+                            ,fg='green', font=EXPLAND_FONT)
+        label_1st.pack(side="top", fill="x", padx=200)
         button = tk.Button(self, text="I'm accept", bg="OliveDrab2", height=2, font=BUTTON_FONT,
                            command=lambda: controller.show_frame("PageOne"))
         button.pack(side=BOTTOM, fill='x')
@@ -178,7 +198,7 @@ class PageOne(tk.Frame):
             select.place(x=150, y=self.y)
 
             Number = Label(self, textvariable=quantity[i], bg='lavender', font=BUTTON_FONT, relief=RAISED)
-            Number.place(height=30, width=70, x=605, y=self.y)
+            Number.place(height=30, width=70, x=805, y=self.y)
 
             # B_plus = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command= lambda :controller.In(i+1))
             # B_plus.place(height=30, width=30, x=700, y=self.y)
@@ -188,34 +208,34 @@ class PageOne(tk.Frame):
             self.y += 70
 
         B_plus = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command=lambda: controller.In(1))
-        B_plus.place(height=30, width=30, x=700, y=100)
+        B_plus.place(height=30, width=30, x=885, y=100)
         B_plus = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command=lambda: controller.In(2))
-        B_plus.place(height=30, width=30, x=700, y=170)
+        B_plus.place(height=30, width=30, x=885, y=170)
         B_plus = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command=lambda: controller.In(3))
-        B_plus.place(height=30, width=30, x=700, y=240)
+        B_plus.place(height=30, width=30, x=885, y=240)
         B_plus = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command=lambda: controller.In(4))
-        B_plus.place(height=30, width=30, x=700, y=310)
+        B_plus.place(height=30, width=30, x=885, y=310)
         B_plus = Button(self, text="+", font=BUTTON_FONT, bg='grey20', fg='red2', command=lambda: controller.In(5))
-        B_plus.place(height=30, width=30, x=700, y=380)
+        B_plus.place(height=30, width=30, x=885, y=380)
 
         B_minus = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command=lambda: controller.De(1))
-        B_minus.place(height=30, width=30, x=550, y=100)
+        B_minus.place(height=30, width=30, x=765, y=100)
         B_minus = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command=lambda: controller.De(2))
-        B_minus.place(height=30, width=30, x=550, y=170)
+        B_minus.place(height=30, width=30, x=765, y=170)
         B_minus = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command=lambda: controller.De(3))
-        B_minus.place(height=30, width=30, x=550, y=240)
+        B_minus.place(height=30, width=30, x=765, y=240)
         B_minus = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command=lambda: controller.De(4))
-        B_minus.place(height=30, width=30, x=550, y=310)
+        B_minus.place(height=30, width=30, x=765, y=310)
         B_minus = Button(self, text="-", font=BUTTON_FONT, bg='grey20', fg='green2', command=lambda: controller.De(5))
-        B_minus.place(height=30, width=30, x=550, y=380)
+        B_minus.place(height=30, width=30, x=765, y=380)
 
         # create changePage widget
         button1 = tk.Button(self, text="Go to the start page", bg="salmon", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("StartPage"))
-        button1.place(x=20, y=460)
+        button1.place(x=25, y=460)
         button2 = tk.Button(self, text="Next", bg="OliveDrab2", font=BUTTON_FONT,
                             command=lambda: controller.CheckUser(self.row))
-        button2.place(x=700, y=460)
+        button2.place(x=850, y=460)
 
 
 class PageTwo(tk.Frame):
@@ -245,38 +265,8 @@ class PageTwo(tk.Frame):
         Notsure = tk.Button(self, text="Not sure", bg="salmon", font=BUTTON_FONT,
                             command=lambda: controller.show_frame("PageOne"))
         Notsure.place(x=20, y=460)
-        sure = tk.Button(self, text="sure", bg="OliveDrab2", font=BUTTON_FONT, command=self.Show_Product)
+        sure = tk.Button(self, text="sure", bg="OliveDrab2", font=BUTTON_FONT, command=lambda :controller.Show_Product())
         sure.place(x=700, y=460)
-
-    def Show_Product(self):
-        self.list_ID = []
-        self.list_NUM = []
-        answer = tkMessageBox.askquestion("Verify", "Please use your KeyCard")
-        if answer == "yes":
-
-            product = []
-            for i in range(self.row):
-                product.append(Name_ofIC[i].get())
-                product.append(quantity[i].get())
-            #print product
-            for i in range(0, len(product) - 1):
-                if product[i] != "Default":
-                    if i % 2 == 0:
-                        value_idofic = product[i]
-                        self.list_ID.append(product[i])
-                        value_numofall = product[i + 1]
-                        self.list_NUM.append(int(product[i+1]))
-                        Database.id_user(value_idofic, value_numofall)
-                        Database.Commit()
-
-                        # Database.insert_history(58340500099,value_idofic,value_numofall)
-                        # Database.Commit()
-                        # print product[i], product[i + 1]
-                        #
-
-            #print self.list_ID
-            #print self.list_NUM
-            Motor(self.list_ID,self.list_NUM)
 
 class Admin(tk.Frame):
     def __init__(self, parent, controller):
@@ -311,7 +301,7 @@ class Admin(tk.Frame):
                             command=self.checkadmin,
                             relief=RAISED,
                             cursor="plus")
-        self.Enter.place(x=645, y=450)
+        self.Enter.place(x=850, y=450)
         self.Back = Button(self, font=BUTTON_FONT, height=2, width=10, text='Back', bg='salmon', relief=RAISED,
                            cursor="plus",
                            command=lambda: controller.show_frame("StartPage"))
@@ -391,16 +381,6 @@ class Motor():
 
             elif list_ID[i] == 'SN74HC100N':
                 pass
-
-
-
-
-
-
-
-
-
-
 
 '''def main():
     root = Tk()
