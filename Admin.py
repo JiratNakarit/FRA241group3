@@ -32,7 +32,6 @@ class Admin(Frame):
               font=fonte1, width=8).pack(side=LEFT)
         self.tye = Entry(self.frame2, width=10,
                          font=fonte1,textvariable=self.textEntryVar)
-        self.tye.focus_force()
         self.tye.pack(side=LEFT)
         self.tye.bind('<FocusIn>',self.numpadEntry1)
 
@@ -40,7 +39,6 @@ class Admin(Frame):
               font=fonte1, width=8).pack(side=LEFT)
         self.name = Entry(self.frame5, width=10,
                           font=fonte1,textvariable=self.textEntryVar2)
-        self.name.focus_force()
         self.name.pack(side=LEFT)
         self.name.bind('<FocusIn>',self.numpadEntry2)
         #############33
@@ -66,6 +64,7 @@ class Admin(Frame):
 
         self.edited = 0
         self.count = 0
+
 
     def conferir(self):
 

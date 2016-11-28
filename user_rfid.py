@@ -8,6 +8,7 @@ class Read_RFID:
     def get_uid(self):
         # return uid in RFID
         rfid_uid = [128,15,141,59]
+        # rfid_uid = [128,15,177,88]
         # MIFAREReader = MFRC522.MFRC522()
         hex_uid = ''
 
