@@ -71,3 +71,25 @@ class Read_RFID:
             if uid == lst[i]:
                 post = i
         return int(lst2[post])
+
+    def check_role(self,uid):
+        lst = Database.data_user(Database.cursor,1)
+        lst2 = Database.data_user(Database.cursor,1)
+        lst_role = Database.data_user(Database.cursor,3)
+        lst = list(lst)
+        lst2 = list(lst2)
+        for i in range(len(lst)):
+            lst[i] = int(lst[i])
+
+        for i in range(len(lst)):
+            lst[i] = format(lst[i],'02x')
+
+        for i in range(len(lst)):
+            if uid == lst[i]:
+                post = i
+        role = lst_role[post]
+
+        if role == 'admin':
+            return True
+        else:
+            return False
