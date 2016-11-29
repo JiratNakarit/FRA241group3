@@ -77,7 +77,7 @@ class UserInterface(tk.Tk):
                 false += 1
             if Name_ofIC[i].get() != str("Default") and quantity[i].get() != str(0):
                 correct += 1
-        if No_Type == 5 and No_Name == 5:
+        if No_Type == row and No_Name == row:
             tkMessageBox.showwarning("WARNING!", "Please select at least one")
         elif correct != 0 and false == 0:
             self.show_frame("PageTwo")
@@ -127,6 +127,7 @@ class UserInterface(tk.Tk):
                         Database.Commit()
                         Database.insert_history(stid,value_idofic,value_numofall)
                         Database.Commit()
+                        Motor(self.list_ID,self.list_NUM)
                         self.show_frame("StartPage")
         else:
             error = tkMessageBox.showinfo("Card is not correct","Try again!")

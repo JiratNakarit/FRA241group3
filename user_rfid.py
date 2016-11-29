@@ -1,32 +1,32 @@
 from Class import *
 # Use below module when this program is used on RPi
-# import RPi.GPIO as GPIO
-# import MFRC522
+import RPi.GPIO as GPIO
+import MFRC522
 
 class Read_RFID:
 
     def get_uid(self):
         # return uid in RFID
-        rfid_uid = [128,15,141,59]
+        rfid_uid = []
         # rfid_uid = [128,15,177,88]
-        # MIFAREReader = MFRC522.MFRC522()
+        MIFAREReader = MFRC522.MFRC522()
         hex_uid = ''
 
-        # while True:
-        #     (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
-        #
-        #     # If a card is found
-        #     if status == MIFAREReader.MI_OK:
-        #         print "Card detected"
-        #     # Get the UID of the card
-        #     (status,uid) = MIFAREReader.MFRC522_Anticoll()
-        #     # If we have the UID, continue
-        #     if status == MIFAREReader.MI_OK:
-        #         rfid_uid = uid
-        #         break
-        #
-        # rfid_uid.pop()
-        # rfid_uid.reverse()
+        while True:
+            (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+
+            # If a card is found
+            if status == MIFAREReader.MI_OK:
+                print "Card detected"
+            # Get the UID of the card
+            (status,uid) = MIFAREReader.MFRC522_Anticoll()
+            # If we have the UID, continue
+            if status == MIFAREReader.MI_OK:
+                rfid_uid = uid
+                break
+
+        rfid_uid.pop()
+        rfid_uid.reverse()
 
         ###################
         # changes uid to hex number but on string
