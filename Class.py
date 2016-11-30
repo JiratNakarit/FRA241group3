@@ -51,6 +51,15 @@ class Database:
             Num.append(i)
         return Num
 
+    def get_stid(self,rfid_value):
+        stid = []
+        sql = "SELECT `stid` FROM `user` WHERE cardid = '%s'" % (str(rfid_value))
+        Database.cursor.execute(sql)
+        data = Database.cursor.fetchone()
+        for i in data:
+            stid.append(i)
+        return int(stid[0])
+
     def includeColumn(self, data):
         column = []
         count = 1
